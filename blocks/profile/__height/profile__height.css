@@ -1,0 +1,26 @@
+.profile__height {
+  width: 150px;
+  min-height: 50px;
+  border: 2px solid #fff;
+  position: relative;
+  border-radius: 2px;
+  box-sizing: border-box;
+  transition: all .3s linear ;
+}
+
+.profile__height:hover {
+  opacity: .6;
+}
+
+@media (max-width:780px) {
+  .profile__height {
+    margin: 36px auto 0 auto;
+    width: 282px;
+  }
+}
+
+@media (max-width:340px) {
+  .profile__height {
+    width: 100%;
+  }
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Места в России</title>
+  <link rel="stylesheet" href="./page/index.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <div class="popap">
+      <div class="popap__conteiner">
+        <img src="./images/CloseIcon.svg" alt="Знак закрытия" class="popap__close">
+        <h2 class="popap__text">Редактировать профиль</h2>
+        <form action="get" class="popap__form">
+          <input type="text" placeholder="Жак-Ив Кусто" class="popap__input popap__input_autor">
+          <input type="text" placeholder="Исследователь океана" class="popap__input popap__input_prof">
+          <button type="submit" class="popap__btn">Сохранить</button>
+        </form>
+      </div>
+
+    </div>
+
+    <header class="header">
+      <img src="./images/logo.svg" alt="Логотип" class="header__logo">
+    </header>
+
+    <main>
+      <section class="profile conteiner">
+        <img src="./images/Avatar.jpg" alt="Аватарка" class="profile__img">
+        <div class="profile__info">
+          <div class="profile__box">
+            <p class="profile__autor">Жак-Ив Кусто</p>
+            <img src="./images/EditButton.svg" alt="Кнопка редактированя" class="profile__btn-edit">
+          </div>
+          <p class="profile__text">Исследователь океана</p>
+        </div>
+        <div class="profile__height">
+          <img src="./images/Add-btn.svg" alt="Кнопка добавить" class="profile__btn-add">
+        </div>
+
+      </section>
+
+      <section class="elements conteiner">
+        <div class="elements__element">
+          <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements__img">
+          <div class="elements__box">
+            <h2 class="elements__title">Карачаевск</h2>
+            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+          </div>
+        </div>
+
+        <div class="elements__element">
+          <img src="./images/elibrus.jpg" alt="Гора Эльбрус" class="elements__img">
+          <div class="elements__box">
+            <h2 class="elements__title">Гора Эльбрус</h2>
+            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+          </div>
+        </div>
+
+        <div class="elements__element">
+          <img src="./images/dombai.jpg" alt="Домбай" class="elements__img">
+          <div class="elements__box">
+            <h2 class="elements__title">Домбай</h2>
+            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+          </div>
+        </div>
+        <div class="elements__element">
+          <img src="./images/elibrus.jpg" alt="Гора Эльбрус" class="elements__img">
+          <div class="elements__box">
+            <h2 class="elements__title">Гора Эльбрус</h2>
+            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+          </div>
+        </div>
+
+        <div class="elements__element">
+          <img src="./images/dombai.jpg" alt="Домбай" class="elements__img">
+          <div class="elements__box">
+            <h2 class="elements__title">Домбай</h2>
+            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+          </div>
+        </div>
+
+        <div class="elements__element">
+          <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements__img">
+          <div class="elements__box">
+            <h2 class="elements__title">Карачаево-Черкесская Республика</h2>
+            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+          </div>
+        </div>
+
+
+      </section>
+    </main>
+
+    <footer class="footer conteiner">
+      <p class="footer__text">&#169; 2020 Mesto Russia</p>
+    </footer>
+  </div>
+  <script src="./js.js"></script>
+</body>
+
+</html>

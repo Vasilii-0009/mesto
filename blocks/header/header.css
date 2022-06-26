@@ -1,0 +1,26 @@
+.header {
+max-width: 880px;
+width: calc(100% - 2*200px);
+margin: 0 auto;
+min-height: 74px;
+border-bottom: 1px solid rgba(84, 84, 84, 1);
+}
+
+
+  @media (max-width:1100px) {
+    .header {
+      width: calc(100% - 2*150px);
+    }
+  }
+  
+  @media (max-width:991px) {
+    .header {
+      width: calc(100% - 2*100px);
+    }
+  }
+  
+  @media (max-width:780px) {
+    .header {
+      width: 100%;
+    }
+  }
