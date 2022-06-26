@@ -5,7 +5,7 @@
   position: relative;
   border-radius: 2px;
   box-sizing: border-box;
-  transition: all .3s linear ;
+  transition: all .3s linear;
 }
 
 .profile__height:hover {
