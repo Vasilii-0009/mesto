@@ -2,10 +2,19 @@
   width: 150px;
   min-height: 50px;
   border: 2px solid #fff;
-  position: relative;
   border-radius: 2px;
   box-sizing: border-box;
   transition: all .3s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background-image: url(../../../images/Add-btn.svg);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center center;
+  background-size: 22px 22px;
+
 }
 
 .profile__height:hover {
@@ -22,5 +31,6 @@
 @media (max-width:340px) {
   .profile__height {
     width: 100%;
+    background-size: 16px 16px;
   }
 }

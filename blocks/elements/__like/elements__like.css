@@ -1,7 +1,12 @@
 .elements__like {
-  transition: all .3s linear;
+transition: all .3s linear;
+border: none;
+background-color: transparent;
+width: 22px;
+height: 19px;
 }
 
 .elements__like:hover {
   opacity: .5;
 }
+

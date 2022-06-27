@@ -12,9 +12,3 @@
     line-height: 1.22;
   }
 }
-
-@media (max-width:780px) {
-  .profile__autor-raname{
-    margin: 0 0 0 0;
-  }
-}

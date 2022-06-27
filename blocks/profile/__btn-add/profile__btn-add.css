@@ -1,9 +1,10 @@
 .profile__btn-add {
-  position: absolute;
   width: 22px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  height: 22px;
+  background-size: cover;
+  background-image: url(../../../images/Add-btn.svg);
+  background-color: transparent;
+  border: none;
 }
 
 
@@ -11,5 +12,6 @@
 @media (max-width:320px) {
   .profile__btn-add {
     width: 16px;
+    height: 16px;
   }
 }

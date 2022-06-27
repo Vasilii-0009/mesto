@@ -14,11 +14,12 @@
 
     <div class="popap">
       <div class="popap__conteiner">
-        <img src="./images/CloseIcon.svg" alt="Знак закрытия" class="popap__close">
+        <button type="button" class="popap__close"></button>
         <h2 class="popap__text">Редактировать профиль</h2>
-        <form action="get" class="popap__form">
-          <input type="text" placeholder="Жак-Ив Кусто" class="popap__input popap__input_autor">
-          <input type="text" placeholder="Исследователь океана" class="popap__input popap__input_prof">
+        <form action="get" class="popap__form" name="form">
+          <input type="text" name="input" placeholder="Жак-Ив Кусто" class="popap__input popap__input_value_autor">
+          <input type="text" name="input" placeholder="Исследователь океана"
+            class="popap__input popap__input_value_prof">
           <button type="submit" class="popap__btn">Сохранить</button>
         </form>
       </div>
@@ -34,14 +35,13 @@
         <img src="./images/Avatar.jpg" alt="Аватарка" class="profile__img">
         <div class="profile__info">
           <div class="profile__box">
-            <p class="profile__autor">Жак-Ив Кусто</p>
-            <img src="./images/EditButton.svg" alt="Кнопка редактированя" class="profile__btn-edit">
+            <h1 class="profile__autor">Жак-Ив Кусто</h1>
+            <button type="button" class="profile__btn-edit"></button>
           </div>
           <p class="profile__text">Исследователь океана</p>
         </div>
-        <div class="profile__height">
-          <img src="./images/Add-btn.svg" alt="Кнопка добавить" class="profile__btn-add">
-        </div>
+        <button type="button" class="profile__height"></button>
+
 
       </section>
 
@@ -50,7 +50,9 @@
           <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements__img">
           <div class="elements__box">
             <h2 class="elements__title">Карачаевск</h2>
-            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+            <button type="button" class="elements__like">
+              <img src="./images/heart.svg" alt="лайк">
+            </button>
           </div>
         </div>
 
@@ -58,7 +60,9 @@
           <img src="./images/elibrus.jpg" alt="Гора Эльбрус" class="elements__img">
           <div class="elements__box">
             <h2 class="elements__title">Гора Эльбрус</h2>
-            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+            <button type="button" class="elements__like">
+              <img src="./images/heart.svg" alt="лайк">
+            </button>
           </div>
         </div>
 
@@ -66,14 +70,18 @@
           <img src="./images/dombai.jpg" alt="Домбай" class="elements__img">
           <div class="elements__box">
             <h2 class="elements__title">Домбай</h2>
-            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+            <button type="button" class="elements__like">
+              <img src="./images/heart.svg" alt="лайк">
+            </button>
           </div>
         </div>
         <div class="elements__element">
           <img src="./images/elibrus.jpg" alt="Гора Эльбрус" class="elements__img">
           <div class="elements__box">
             <h2 class="elements__title">Гора Эльбрус</h2>
-            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+            <button type="button" class="elements__like">
+              <img src="./images/heart.svg" alt="лайк">
+            </button>
           </div>
         </div>
 
@@ -81,7 +89,9 @@
           <img src="./images/dombai.jpg" alt="Домбай" class="elements__img">
           <div class="elements__box">
             <h2 class="elements__title">Домбай</h2>
-            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+            <button type="button" class="elements__like">
+              <img src="./images/heart.svg" alt="лайк">
+            </button>
           </div>
         </div>
 
@@ -89,7 +99,9 @@
           <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements__img">
           <div class="elements__box">
             <h2 class="elements__title">Карачаево-Черкесская Республика</h2>
-            <img src="./images/heart.svg" alt="Лайк" class="elements__like">
+            <button type="button" class="elements__like">
+              <img src="./images/heart.svg" alt="лайк">
+            </button>
           </div>
         </div>
 
@@ -101,7 +113,7 @@
       <p class="footer__text">&#169; 2020 Mesto Russia</p>
     </footer>
   </div>
-  <script src="./js.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>
