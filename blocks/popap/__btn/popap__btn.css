@@ -12,6 +12,7 @@
   line-height: 1.22;
   border-radius: 2px;
   transition: all .3s linear;
+  cursor: pointer;
 }
 
 .popap__btn:hover {

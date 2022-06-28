@@ -6,6 +6,7 @@
   background-color: transparent;
   background-size: cover;
   border: none;
+  cursor: pointer;
 }
 
 .profile__btn-edit:hover {

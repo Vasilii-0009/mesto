@@ -7,7 +7,9 @@ height: 32px;
 transition: all .3s linear;
 background-image: url(../../../images/CloseIcon.svg);
 background-color: transparent;
+background-size: cover;
 border: none;
+cursor: pointer;
 }
 
 .popap__close:hover {

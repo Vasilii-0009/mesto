@@ -14,7 +14,7 @@
   background-color: transparent;
   background-position: center center;
   background-size: 22px 22px;
-
+cursor: pointer;
 }
 
 .profile__height:hover {
