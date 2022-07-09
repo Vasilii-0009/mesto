@@ -28,7 +28,7 @@
 /* popap-photo */
 @import url(../blocks/popap-photo/popap-photo.css);
 @import url(../blocks/popap-photo/__conteiner/popap-photo__conteiner.css);
-@import url(../blocks/popap-photo/__img/popap-phot__img.css);
+@import url(../blocks/popap-photo/__img/popap-photo__img.css);
 @import url(../blocks/popap-photo/__text/popap-photo__text.css);
 @import url(../blocks/popap-photo/__btn/popap-photo__btn.css);
 @import url(../blocks/popap-photo/_open/popap-photo_open.css);
