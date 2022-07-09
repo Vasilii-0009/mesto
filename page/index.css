@@ -16,6 +16,23 @@
 @import url(../blocks/popap/__input/popap__input.css);
 @import url(../blocks/popap/__btn/popap__btn.css);
 
+/* popap-plus */
+@import url(../blocks/popap-plus/popap-plus.css);
+@import url(../blocks/popap-plus/__conteiner/popap-plus__conteiner.css);
+@import url(../blocks/popap-plus/__close/popap-plus__close.css);
+@import url(../blocks/popap-plus/__text/popap-plus__text.css);
+@import url(../blocks/popap-plus/__input/popap-plus__input.css);
+@import url(../blocks/popap-plus/__btn/popap-plus__btn.css);
+@import url(../blocks/popap-plus/_opened/popap-plus_opened.css);
+
+/* popap-photo */
+@import url(../blocks/popap-photo/popap-photo.css);
+@import url(../blocks/popap-photo/__conteiner/popap-photo__conteiner.css);
+@import url(../blocks/popap-photo/__img/popap-phot__img.css);
+@import url(../blocks/popap-photo/__text/popap-photo__text.css);
+@import url(../blocks/popap-photo/__btn/popap-photo__btn.css);
+@import url(../blocks/popap-photo/_open/popap-photo_open.css);
+
 /* conteiner */
 @import url(../blocks/conteiner/conteiner.css);
 
@@ -31,7 +48,7 @@
 @import url(../blocks/profile/__autor/profile__autor.css);
 @import url(../blocks/profile/__btn-edit/profile__btn-edit.css);
 @import url(../blocks/profile/__text/profile__text.css);
-@import url(../blocks/profile/__height/profile__height.css);
+@import url(../blocks/profile/__add/profile__add.css);
 @import url(../blocks/profile/__autor-raname/profile__autor-raname.css);
 
 /* elements */
@@ -41,6 +58,8 @@
 @import url(../blocks/elements/__box/elements__box.css);
 @import url(../blocks/elements/__title/elements__title.css);
 @import url(../blocks/elements/__like/elements__like.css);
+@import url(../blocks/elements/__img-heart/elements__img-heart.css);
+@import url(../blocks/elements/__basket/elements__basket.css);
 
 /* footer */
 @import url(../blocks/footer/footer.css);

@@ -1,4 +1,4 @@
-.profile__height {
+.profile__add {
   width: 150px;
   min-height: 50px;
   border: 2px solid #fff;
@@ -17,19 +17,19 @@
 cursor: pointer;
 }
 
-.profile__height:hover {
+.profile__add:hover {
   opacity: .6;
 }
 
 @media (max-width:780px) {
-  .profile__height {
+  .profile__add {
     margin: 36px auto 0 auto;
     width: 282px;
   }
 }
 
 @media (max-width:340px) {
-  .profile__height {
+  .profile__add {
     width: 100%;
     background-size: 16px 16px;
   }

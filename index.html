@@ -11,6 +11,7 @@
 
 <body>
   <div class="page">
+    <!-- popap -->
     <div class="popap">
       <div class="popap__conteiner">
         <button type="button" class="popap__close"></button>
@@ -24,7 +25,34 @@
       </div>
 
     </div>
+    <!-- popap plus -->
+    <div class="popap-plus">
+      <div class="popap-plus__conteiner">
+        <button type="button" class="popap-plus__close"></button>
+        <h2 class="popap-plus__text">Новое место</h2>
+        <form action="get" class="popap-plus__form" name="forms">
+          <input type="text" name="autors" placeholder="Название"
+            class="popap-plus__input popap-plus__input_value_autor">
+          <input type="text" name="profs" placeholder="Ссылка на картинку"
+            class="popap-plus__input popap-plus__input_value_prof">
+          <button type="submit" class="popap-plus__btn">Создать</button>
+        </form>
+      </div>
 
+    </div>
+
+    <!-- popap img -->
+
+    <div class="popap-photo">
+      <div class="popap-photo__conteiner">
+        <img src="" class="popap-phot__img
+    " alt="">
+        <p class="popap-photo__text"></p>
+        <button type="button" class="popap-photo__btn"></button>
+      </div>
+    </div>
+
+    <!-- header -->
     <header class="header">
       <img src="./images/logo.svg" alt="Логотип" class="header__logo">
     </header>
@@ -39,20 +67,20 @@
           </div>
           <p class="profile__text">Исследователь океана</p>
         </div>
-        <button type="button" class="profile__height"></button>
+        <button type="button" class="profile__add"></button>
 
 
       </section>
 
       <section class="elements conteiner">
-        <div class="elements__element">
+        <!-- <div class="elements__element">
           <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements__img">
           <div class="elements__box">
             <h2 class="elements__title">Карачаевск</h2>
             <button type="button" class="elements__like">
-              <img src="./images/heart.svg" alt="лайк">
             </button>
           </div>
+          <button type="button" class="elements__basket"></button>
         </div>
 
         <div class="elements__element">
@@ -60,7 +88,6 @@
           <div class="elements__box">
             <h2 class="elements__title">Гора Эльбрус</h2>
             <button type="button" class="elements__like">
-              <img src="./images/heart.svg" alt="лайк">
             </button>
           </div>
         </div>
@@ -70,7 +97,6 @@
           <div class="elements__box">
             <h2 class="elements__title">Домбай</h2>
             <button type="button" class="elements__like">
-              <img src="./images/heart.svg" alt="лайк">
             </button>
           </div>
         </div>
@@ -79,7 +105,6 @@
           <div class="elements__box">
             <h2 class="elements__title">Гора Эльбрус</h2>
             <button type="button" class="elements__like">
-              <img src="./images/heart.svg" alt="лайк">
             </button>
           </div>
         </div>
@@ -89,7 +114,6 @@
           <div class="elements__box">
             <h2 class="elements__title">Домбай</h2>
             <button type="button" class="elements__like">
-              <img src="./images/heart.svg" alt="лайк">
             </button>
           </div>
         </div>
@@ -99,10 +123,9 @@
           <div class="elements__box">
             <h2 class="elements__title">Карачаево-Черкесская Республика</h2>
             <button type="button" class="elements__like">
-              <img src="./images/heart.svg" alt="лайк">
             </button>
           </div>
-        </div>
+        </div> -->
 
 
       </section>
@@ -112,6 +135,18 @@
       <p class="footer__text">&#169; 2020 Mesto Russia</p>
     </footer>
   </div>
+  <!-- template -->
+  <template id="elements__element">
+    <div class="elements__element">
+      <img alt="Карачаевск" src="" class="elements__img">
+      <div class="elements__box">
+        <h2 class="elements__title"></h2>
+        <button type="button" class="elements__like">
+        </button>
+      </div>
+      <button type="button" class="elements__basket"></button>
+    </div>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 

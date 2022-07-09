@@ -5,6 +5,7 @@ background-color: transparent;
 width: 22px;
 height: 19px;
 cursor: pointer;
+background-image: url(../../../images/heart.svg);
 }
 
 .elements__like:hover {

@@ -1,0 +1,20 @@
+.popap-phot__img {
+  max-width: 75vw;
+  max-height: 75vh;
+  object-fit: cover;
+}
+@media (max-width:767px) {
+  .popap-phot__img {
+    width: 433px;
+    height: 540px;
+  }
+}
+
+@media (max-width: 520px) {
+  .popap-phot__img {
+    width: 240px;
+    height: 299px;
+  }
+
+}
+ 
