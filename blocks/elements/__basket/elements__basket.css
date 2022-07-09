@@ -9,7 +9,7 @@
   background-color: transparent;
   border: 0;
   cursor: pointer;
-  transition: all .3s linear ;
+  transition: all .3s linear;
 }
 .elements__basket:hover {
   opacity: .6;
