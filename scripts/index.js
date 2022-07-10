@@ -95,6 +95,8 @@ const initialCards = [
 
 const template = document.querySelector('#elements__element').content;
 const element = document.querySelector('.elements')
+
+
 // const contentTemplate = template.querySelector('.elements__element').cloneNode(true)
 
 initialCards.forEach((initialCardsItemx) => {
@@ -104,7 +106,7 @@ initialCards.forEach((initialCardsItemx) => {
   contentTemplate.querySelector('.elements__title').textContent = initialCardsItemx.name
   contentTemplate.querySelector('.elements__img').src = initialCardsItemx.link
 
-  element.append(contentTemplate)
+  element.append(contentTemplate);
 
   // popapPhoto
   const templateImage = contentTemplate.querySelector('.elements__img');
@@ -114,10 +116,12 @@ initialCards.forEach((initialCardsItemx) => {
   templateImage.addEventListener('click', function () {
 
     popatPhtoOpen.classList.add('popap-photo_open')
-    const popapImg = document.querySelector('.popap-phot__img')
+    const popapImg = document.querySelector('.popap-photo__img')
     const poapText = document.querySelector('.popap-photo__text')
-    popapImg.src = initialCardsItemx.link
     poapText.textContent = initialCardsItemx.name
+    popapImg.src = initialCardsItemx.link
+
+
   })
 
   popapPhotClose.addEventListener('click', function () {
@@ -144,22 +148,38 @@ initialCards.forEach((initialCardsItemx) => {
 
 })
 
-// renameElemnt
+
+// photoAdd
 const formPlus = document.querySelector('.popap-plus__form')
-function formPopapPlus(evt) {
+const popapText = document.querySelector('.popap-plus__input_value_autor')
+const popapImg = document.querySelector('.popap-plus__input_value_prof')
+const templatePhoto = document.querySelector('#elements__element').content;
+
+formPlus.addEventListener('submit', function (evt) {
   evt.preventDefault()
 
-  const inputPlusText = document.querySelector('.popap-plus__input_value_autor')
-  const inputPlusImg = document.querySelector('.popap-plus__input_value_prof')
 
-  const templateText = document.querySelector('.elements__title').textContent = inputPlusText.value
-  const templateImg = document.querySelector('.elements__img').src = inputPlusImg.value
 
+  const cloneTemplatePhoto = templatePhoto.querySelector('.elements__element').cloneNode(true)
+
+  cloneTemplatePhoto.querySelector('.elements__title').textContent = popapText.value
+  cloneTemplatePhoto.querySelector('.elements__img').src = popapImg.value
+
+  element.prepend(cloneTemplatePhoto);
+  // closepopa
   popapPllusOpened.classList.remove('popap-plus_opened')
 
-}
+  // likeAdd
+  const likeAdd = cloneTemplatePhoto.querySelector('.elements__like')
+  likeAdd.addEventListener('click', () => {
+    likeAdd.classList.toggle('elements__img-heart')
+  })
 
-formPlus.addEventListener('submit', formPopapPlus);
+
+});
+
+
+
 
 
 
