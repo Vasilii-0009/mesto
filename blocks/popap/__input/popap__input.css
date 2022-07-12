@@ -11,7 +11,7 @@
   color: #000;
 }
 
-.popap__input:first-child{
+.popap__input:first-child {
   margin-bottom: 30px;
 }
 
@@ -19,6 +19,27 @@
   color: #000;
 }
 
+/* .popap-edit__input {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  padding: 0 0 13px 0;
+  box-sizing: border-box;
+  color: #000;
+}
+
+.popap-edit__input:first-child{
+  margin-bottom: 30px;
+}
+
+.popap-edit__input::placeholder {
+  color: #000;
+}
 
 
 
+ */

@@ -15,12 +15,12 @@
   cursor: pointer;
 }
 
-.popap__btn:hover {
+.popap__btn {
   opacity: .8;
 }
 
 @media (max-width:767px) {
-  .popap__btn {
+.popap__btn {
     margin-top: 45px;
     font-size: 14px;
     line-height: 1.2;

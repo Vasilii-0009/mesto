@@ -12,30 +12,31 @@
 <body>
   <div class="page">
     <!-- popap -->
-    <div class="popap">
-      <div class="popap__conteiner">
-        <button type="button" class="popap__close"></button>
-        <h2 class="popap__text">Редактировать профиль</h2>
-        <form action="get" class="popap__form" name="form">
-          <input type="text" name="autor" placeholder="Жак-Ив Кусто" class="popap__input popap__input_value_autor">
+    <div class="popap popap-edit">
+      <div class="popap-edit__conteiner">
+        <button type="button" class="popap__close popap-edit__close"></button>
+        <h2 class="popap-edit__text">Редактировать профиль</h2>
+        <form action="get" class="popap__form popap__form-edit" name="form">
+          <input type="text" name="autor" placeholder="Жак-Ив Кусто"
+            class="popap__input popap-edit__input popap__input_value_autor">
           <input type="text" name="prof" placeholder="Исследователь океана"
-            class="popap__input popap__input_value_prof">
-          <button type="submit" class="popap__btn">Сохранить</button>
+            class="popap__input popap-edit__input popap__input_value_prof">
+          <button type="submit" class="popap__btn popap-edit__btn">Сохранить</button>
         </form>
       </div>
 
     </div>
     <!-- popap plus -->
-    <div class="popap-plus">
+    <div class="popap popap-plus">
       <div class="popap-plus__conteiner">
-        <button type="button" class="popap-plus__close"></button>
+        <button type="button" class="popap__close popap-plus__close"></button>
         <h2 class="popap-plus__text">Новое место</h2>
-        <form action="get" class="popap-plus__form" name="forms">
+        <form action="get" class="popap__form popap-plus__form" name="forms">
           <input type="text" name="autors" placeholder="Название"
-            class="popap-plus__input popap-plus__input_value_autor">
+            class="popap__input popap-plus__input popap-plus__input_value_autor">
           <input type="text" name="profs" placeholder="Ссылка на картинку"
-            class="popap-plus__input popap-plus__input_value_prof">
-          <button type="submit" class="popap-plus__btn">Создать</button>
+            class="popap__input  popap-plus__input popap-plus__input_value_prof">
+          <button type="submit" class="popap__btn popap-plus__btn">Создать</button>
         </form>
       </div>
 
@@ -43,11 +44,11 @@
 
     <!-- popap img -->
 
-    <div class="popap-photo">
+    <div class=" popap popap-photo">
       <div class="popap-photo__conteiner">
         <img src="" class="popap-photo__img" alt="">
         <p class="popap-photo__text"></p>
-        <button type="button" class="popap-photo__btn"></button>
+        <button type="button" class="popap__close popap-photo__btn"></button>
       </div>
     </div>
 

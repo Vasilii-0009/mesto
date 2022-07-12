@@ -1,4 +1,4 @@
-.popap__text {
+.popap-edit__text {
   font-weight: 900;
   font-size: 24px;
   line-height: 1;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width:767px) {
-  .popap__text {
+  .popap-edit__text {
     font-size: 18px;
     margin: 0 0 75px 0;
   }

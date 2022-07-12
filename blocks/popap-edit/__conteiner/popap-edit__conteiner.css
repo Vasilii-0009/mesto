@@ -1,4 +1,4 @@
-.popap__conteiner {
+.popap-edit__conteiner {
   background-color: #fff;
   padding: 34px 36px 37px 36px;
   max-width: 430px;
@@ -11,7 +11,7 @@
 }
 
 @media (max-width: 767px) {
-  .popap__conteiner {
+.popap-edit__conteiner {
     max-width: 282px;
     padding: 25px 22px 25px 22px;
     margin: 0 19px;

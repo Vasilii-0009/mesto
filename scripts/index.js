@@ -1,36 +1,50 @@
-const profileEdit = document.querySelector('.profile__btn-edit');
-
-const popupOpened = document.querySelector('.popap');
-const popapClose = document.querySelector('.popap__close');
-
-
-const inputAutor = document.querySelector('.popap__input_value_autor');
-const inputProf = document.querySelector('.popap__input_value_prof');
-
-const nameInput = document.querySelector('.profile__autor');
-const jobInput = document.querySelector('.profile__text');
-
 
 const formElement = document.querySelector('.popap__form');
 
+const openPopape = document.querySelector('.popap')
+// sconst openPopapes = document.querySelector('.popap')
+// функиция открытие попапа edit
+const profileEdit = document.querySelector('.profile__btn-edit');
+const popupOpened = document.querySelector('.popap-edit');
+//переменые для инпутов 
+const inputAutor = document.querySelector('.popap__input_value_autor');
+const inputProf = document.querySelector('.popap__input_value_prof');
+const nameInput = document.querySelector('.profile__autor');
+const jobInput = document.querySelector('.profile__text');
 
-profileEdit.addEventListener('click', function () {
-  popupOpened.classList.add('popup_opened')
-  // let inputAutor = document.querySelector('.popap__input_value_autor')
-  // let inputProf = document.querySelector('.popap__input_value_prof')
-  // let nameInput = document.querySelector('.profile__autor');
-  // let jobInput = document.querySelector('.profile__text');
+//общая функция для попапов 
+function openPopap(popup) {
+  popup.classList.add('popup_opened')
+}
 
+profileEdit.addEventListener('click', function openPopupProfile() {
+  openPopap(popupOpened)
   inputAutor.value = nameInput.textContent
   inputProf.value = jobInput.textContent
-
 })
 
-popapClose.addEventListener('click', function () {
-  popupOpened.classList.remove('popup_opened')
+// общая функция удаления попапа
+const popapClose = document.querySelector('.popap-edit__close');
+function closePopap(closePopap) {
+  closePopap.classList.remove('popup_opened')
+}
+//удаление попапа edit
+
+// popapClose.forEach((popapCloses) => {
+//   popapCloses.addEventListener('click', function closePopaps() {
+//     closePopap(popupOpened)
+//   })
+// })
+
+// openPopape.forEach((openPopaps) => {
+//   openPopaps.addEventListener('click', function openPopapsd() {
+//     openPopaps.classList('popup_opened')
+//   })
+// })
+popapClose.addEventListener('click', function closePopapProfile() {
+  closePopap(popupOpened)
 
 })
-
 
 function renameInput(evt) {
   evt.preventDefault();
@@ -50,21 +64,21 @@ formElement.addEventListener('submit', renameInput)
 
 
 
-
-// plus
+//  открытие попапа  plus
 const pluseAdd = document.querySelector('.profile__add');
-const plusClose = document.querySelector('.popap-plus__close')
-const popapPllusOpened = document.querySelector('.popap-plus')
+const popapPlus = document.querySelector('.popap-plus')
 
-pluseAdd.addEventListener('click', () => {
-  popapPllusOpened.classList.add('popap-plus_opened')
+pluseAdd.addEventListener('click', function openPopupProfile() {
+  openPopap(popapPlus)
 })
 
-plusClose.addEventListener('click', () => {
-  popapPllusOpened.classList.remove('popap-plus_opened')
+// удаление попапа plus
+const popapClosePlus = document.querySelector('.popap-plus__close')
+popapClosePlus.addEventListener('click', function closePopapProfile() {
+  closePopap(popapPlus)
+
 })
 
-// template.add
 
 const initialCards = [
   {
@@ -113,22 +127,16 @@ initialCards.forEach((initialCardsItemx) => {
   const popatPhtoOpen = document.querySelector('.popap-photo')
   const popapPhotClose = document.querySelector('.popap-photo__btn')
 
-  templateImage.addEventListener('click', function () {
-
-    popatPhtoOpen.classList.add('popap-photo_open')
+  templateImage.addEventListener('click', function openPopupProfile() {
+    openPopap(popatPhtoOpen)
     const popapImg = document.querySelector('.popap-photo__img')
     const poapText = document.querySelector('.popap-photo__text')
     poapText.textContent = initialCardsItemx.name
     popapImg.src = initialCardsItemx.link
 
 
+
   })
-
-  popapPhotClose.addEventListener('click', function () {
-    popatPhtoOpen.classList.remove('popap-photo_open')
-  })
-
-
 
 
   // like
@@ -148,6 +156,14 @@ initialCards.forEach((initialCardsItemx) => {
 
 })
 
+// удаление попапа popapImg
+const popapCloseImg = document.querySelector('.popap-photo__btn')
+const popapPhot = document.querySelector('.popap-photo')
+popapCloseImg.addEventListener('click', function closePopapProfile() {
+  closePopap(popapPhot)
+
+})
+
 
 // photoAdd
 const formPlus = document.querySelector('.popap-plus__form')
@@ -157,17 +173,15 @@ const templatePhoto = document.querySelector('#elements__element').content;
 
 formPlus.addEventListener('submit', function (evt) {
   evt.preventDefault()
-
-
-
   const cloneTemplatePhoto = templatePhoto.querySelector('.elements__element').cloneNode(true)
-
   cloneTemplatePhoto.querySelector('.elements__title').textContent = popapText.value
   cloneTemplatePhoto.querySelector('.elements__img').src = popapImg.value
 
   element.prepend(cloneTemplatePhoto);
   // closepopa
-  popapPllusOpened.classList.remove('popap-plus_opened')
+  // popapPllusOpened.classList.remove('popap-plus_opened')
+  popapPlus.classList.remove('popup_opened')
+
 
   // likeAdd
   const likeAdd = cloneTemplatePhoto.querySelector('.elements__like')

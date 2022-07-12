@@ -1,27 +1,27 @@
 .popap__close {
-position: absolute;
-top: -40px;
-right: -40px;
-width: 32px;
-height: 32px;
-transition: all .3s linear;
-background-image: url(../../../images/CloseIcon.svg);
-background-color: transparent;
-background-size: cover;
-border: none;
-cursor: pointer;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 32px;
+  height: 32px;
+  transition: all .3s linear;
+  background-image: url(../../../images/CloseIcon.svg);
+  background-color: transparent;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
 }
 
 .popap__close:hover {
-  opacity: .6;
-}
-
-
-@media (max-width:767px) {
-  .popap__close {
-    top: -36px;
-    right: 0;
-    width: 20px;
-    height: 20px;
+    opacity: .6;
   }
-}
+  
+  
+  @media (max-width:767px) {
+  .popap__close{
+      top: -36px;
+      right: 0;
+      width: 20px;
+      height: 20px;
+    }
+  }
