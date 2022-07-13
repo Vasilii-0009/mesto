@@ -18,6 +18,9 @@ const formPlus = document.querySelector('.popap-plus__form');
 const popapText = document.querySelector('.popap-plus__input_value_autor');
 const popapImg = document.querySelector('.popap-plus__input_value_prof');
 const element = document.querySelector('.elements');
+const popapsCloses = document.querySelectorAll('.popap__close');
+
+
 
 //общая функция открытия попапов 
 function openPopap(popup) {
@@ -34,17 +37,12 @@ pluseAdd.addEventListener('click', function openPopupProfile() {
   openPopap(popapPlus)
 })
 
-
 // общая функция удаления попапа
 const popapClose = document.querySelector('.popap-edit__close');
 function closePopap(closePopap) {
   closePopap.classList.remove('popup_opened')
 }
-//edit
-popapClose.addEventListener('click', function closePopapProfile() {
-  closePopap(popupEdit)
 
-})
 //edit
 function renameInput(evt) {
   evt.preventDefault();
@@ -55,17 +53,9 @@ function renameInput(evt) {
 }
 formElement.addEventListener('submit', renameInput)
 
-// popapImg
-
-popapCloseImg.addEventListener('click', function closePopapProfile() {
-  closePopap(popapPhot)
-
-})
-
-// plus
-popapClosePlus.addEventListener('click', function closePopapProfile() {
-  closePopap(popapPlus)
-
+popapsCloses.forEach((button) => {
+  const closeButton = button.closest('.popap')
+  closeButton.addEventListener('click', () => closePopap(closeButton))
 })
 const initialCards = [
   {
