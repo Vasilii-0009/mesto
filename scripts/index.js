@@ -95,55 +95,6 @@ const initialCards = [
   }
 ];
 
-// creatCard
-const template = document.querySelector('#elements__element').content;
-
-function createCard(item) {
-
-  const contentTemplate = template.querySelector('.elements__element').cloneNode(true)
-
-  contentTemplate.querySelector('.elements__title').textContent = item.name
-  contentTemplate.querySelector('.elements__img').src = item.link
-  contentTemplate.querySelector('.elements__img').alt = item.name
-  return contentTemplate
-}
-initialCards.forEach((initialCardsItemx) => {
-  const createCaritem = createCard(initialCardsItemx)
-  element.append(createCaritem);
-
-})
-
-// openImg
-const templateImage = document.querySelectorAll('.elements__img');
-function openPopapImage(evt) {
-  openPopap(popapPhot)
-  popapPhotImg.src = evt.target.src;
-  popapPhotImg.alt = evt.target.alt;
-  popapPhotText.textContent = evt.target.parentElement.querySelector('.elements__title').textContent
-}
-templateImage.forEach((templateImageItem) => {
-  templateImageItem.addEventListener('click', openPopapImage)
-})
-
-
-// addliks
-const likes = document.querySelectorAll('.elements__like')
-likes.forEach((likess) => {
-  likess.addEventListener('click', () => {
-    likess.classList.toggle('elements__img-heart')
-  })
-})
-
-// deleteImg
-const btnBacket = document.querySelectorAll('.elements__basket')
-btnBacket.forEach((btnBackets) => {
-  btnBackets.addEventListener('click', () => {
-    const parentBacket = btnBackets.closest('.elements__element')
-    parentBacket.remove()
-  })
-})
-
-
 
 
 // photoAdd
@@ -168,7 +119,14 @@ function creatPhoto(itemImg, itemText) {
   })
 
   const openImg = cloneTemplatePhoto.querySelector('.elements__img')
-  openImg.addEventListener('click', openPopapImage)
+  openImg.addEventListener('click', () => {
+    openPopap(popapPhot)
+    popapPhotImg.src = cloneTemplatePhoto.querySelector('.elements__img').src
+    popapPhotImg.alt = cloneTemplatePhoto.querySelector('.elements__title').textContent
+    popapPhotText.textContent = cloneTemplatePhoto.querySelector('.elements__title').textContent
+
+  })
+
   return cloneTemplatePhoto
 
 }
@@ -178,6 +136,12 @@ formPlus.addEventListener('submit', (evt) => {
   const creatPhotoValue = creatPhoto(popapImg.value, popapText.value)
   element.prepend(creatPhotoValue);
   closePopap(popapPlus)
+})
+
+initialCards.forEach((initialCardsItemx) => {
+  const createCaritem = creatPhoto(initialCardsItemx.link, initialCardsItemx.name)
+  element.append(createCaritem);
+
 })
 
 
