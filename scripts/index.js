@@ -1,89 +1,77 @@
 
 const formElement = document.querySelector('.popap__form');
-
-const openPopape = document.querySelector('.popap')
-// sconst openPopapes = document.querySelector('.popap')
-// функиция открытие попапа edit
 const profileEdit = document.querySelector('.profile__btn-edit');
-const popupOpened = document.querySelector('.popap-edit');
-//переменые для инпутов 
+const popupEdit = document.querySelector('.popap-edit');
 const inputAutor = document.querySelector('.popap__input_value_autor');
 const inputProf = document.querySelector('.popap__input_value_prof');
 const nameInput = document.querySelector('.profile__autor');
 const jobInput = document.querySelector('.profile__text');
+const pluseAdd = document.querySelector('.profile__add');
+const popapPlus = document.querySelector('.popap-plus');
 
-//общая функция для попапов 
+const popapCloseImg = document.querySelector('.popap-photo__btn');
+const popapPhot = document.querySelector('.popap-photo');
+const popapClosePlus = document.querySelector('.popap-plus__close');
+const popapPhotImg = document.querySelector('.popap-photo__img');
+const popapPhotText = document.querySelector('.popap-photo__text');
+const formPlus = document.querySelector('.popap-plus__form');
+const popapText = document.querySelector('.popap-plus__input_value_autor');
+const popapImg = document.querySelector('.popap-plus__input_value_prof');
+const element = document.querySelector('.elements');
+
+//общая функция открытия попапов 
 function openPopap(popup) {
   popup.classList.add('popup_opened')
 }
-
+// edit
 profileEdit.addEventListener('click', function openPopupProfile() {
-  openPopap(popupOpened)
+  openPopap(popupEdit)
   inputAutor.value = nameInput.textContent
   inputProf.value = jobInput.textContent
 })
+//plus
+pluseAdd.addEventListener('click', function openPopupProfile() {
+  openPopap(popapPlus)
+})
+
 
 // общая функция удаления попапа
 const popapClose = document.querySelector('.popap-edit__close');
 function closePopap(closePopap) {
   closePopap.classList.remove('popup_opened')
 }
-//удаление попапа edit
-
-// popapClose.forEach((popapCloses) => {
-//   popapCloses.addEventListener('click', function closePopaps() {
-//     closePopap(popupOpened)
-//   })
-// })
-
-// openPopape.forEach((openPopaps) => {
-//   openPopaps.addEventListener('click', function openPopapsd() {
-//     openPopaps.classList('popup_opened')
-//   })
-// })
+//edit
 popapClose.addEventListener('click', function closePopapProfile() {
-  closePopap(popupOpened)
+  closePopap(popupEdit)
 
 })
-
+//edit
 function renameInput(evt) {
   evt.preventDefault();
-
-  // let inputAutor = document.querySelector('.popap__input_value_autor')
-  // let inputProf = document.querySelector('.popap__input_value_prof')
-  // let nameInput = document.querySelector('.profile__autor')
-  // let jobInput = document.querySelector('.profile__text')
-
   nameInput.textContent = inputAutor.value
   jobInput.textContent = inputProf.value
-  popupOpened.classList.remove('popup_opened')
+  closePopap(popupEdit)
+
 }
-
-
 formElement.addEventListener('submit', renameInput)
 
+// popapImg
 
+popapCloseImg.addEventListener('click', function closePopapProfile() {
+  closePopap(popapPhot)
 
-//  открытие попапа  plus
-const pluseAdd = document.querySelector('.profile__add');
-const popapPlus = document.querySelector('.popap-plus')
-
-pluseAdd.addEventListener('click', function openPopupProfile() {
-  openPopap(popapPlus)
 })
 
-// удаление попапа plus
-const popapClosePlus = document.querySelector('.popap-plus__close')
+// plus
 popapClosePlus.addEventListener('click', function closePopapProfile() {
   closePopap(popapPlus)
 
 })
-
-
 const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+
   },
   {
     name: 'Челябинская область',
@@ -107,93 +95,90 @@ const initialCards = [
   }
 ];
 
+// creatCard
 const template = document.querySelector('#elements__element').content;
-const element = document.querySelector('.elements')
 
-
-// const contentTemplate = template.querySelector('.elements__element').cloneNode(true)
-
-initialCards.forEach((initialCardsItemx) => {
+function createCard(item) {
 
   const contentTemplate = template.querySelector('.elements__element').cloneNode(true)
 
-  contentTemplate.querySelector('.elements__title').textContent = initialCardsItemx.name
-  contentTemplate.querySelector('.elements__img').src = initialCardsItemx.link
+  contentTemplate.querySelector('.elements__title').textContent = item.name
+  contentTemplate.querySelector('.elements__img').src = item.link
+  contentTemplate.querySelector('.elements__img').alt = item.name
+  return contentTemplate
+}
+initialCards.forEach((initialCardsItemx) => {
+  const createCaritem = createCard(initialCardsItemx)
+  element.append(createCaritem);
 
-  element.append(contentTemplate);
+})
 
-  // popapPhoto
-  const templateImage = contentTemplate.querySelector('.elements__img');
-  const popatPhtoOpen = document.querySelector('.popap-photo')
-  const popapPhotClose = document.querySelector('.popap-photo__btn')
+// openImg
+const templateImage = document.querySelectorAll('.elements__img');
+function openPopapImage(evt) {
+  openPopap(popapPhot)
+  popapPhotImg.src = evt.target.src;
+  popapPhotImg.alt = evt.target.alt;
+  popapPhotText.textContent = evt.target.parentElement.querySelector('.elements__title').textContent
+}
+templateImage.forEach((templateImageItem) => {
+  templateImageItem.addEventListener('click', openPopapImage)
+})
 
-  templateImage.addEventListener('click', function openPopupProfile() {
-    openPopap(popatPhtoOpen)
-    const popapImg = document.querySelector('.popap-photo__img')
-    const poapText = document.querySelector('.popap-photo__text')
-    poapText.textContent = initialCardsItemx.name
-    popapImg.src = initialCardsItemx.link
 
-
-
+// addliks
+const likes = document.querySelectorAll('.elements__like')
+likes.forEach((likess) => {
+  likess.addEventListener('click', () => {
+    likess.classList.toggle('elements__img-heart')
   })
+})
 
-
-  // like
-  const likes = contentTemplate.querySelector('.elements__like')
-
-  likes.addEventListener('click', () => {
-    likes.classList.toggle('elements__img-heart')
-  })
-
-  // delete
-  const btnBacket = contentTemplate.querySelector('.elements__basket')
-
-  btnBacket.addEventListener('click', () => {
-    const parentBacket = btnBacket.closest('.elements__element')
+// deleteImg
+const btnBacket = document.querySelectorAll('.elements__basket')
+btnBacket.forEach((btnBackets) => {
+  btnBackets.addEventListener('click', () => {
+    const parentBacket = btnBackets.closest('.elements__element')
     parentBacket.remove()
   })
-
 })
 
-// удаление попапа popapImg
-const popapCloseImg = document.querySelector('.popap-photo__btn')
-const popapPhot = document.querySelector('.popap-photo')
-popapCloseImg.addEventListener('click', function closePopapProfile() {
-  closePopap(popapPhot)
 
-})
 
 
 // photoAdd
-const formPlus = document.querySelector('.popap-plus__form')
-const popapText = document.querySelector('.popap-plus__input_value_autor')
-const popapImg = document.querySelector('.popap-plus__input_value_prof')
 const templatePhoto = document.querySelector('#elements__element').content;
 
-formPlus.addEventListener('submit', function (evt) {
-  evt.preventDefault()
+
+function creatPhoto(itemImg, itemText) {
+
   const cloneTemplatePhoto = templatePhoto.querySelector('.elements__element').cloneNode(true)
-  cloneTemplatePhoto.querySelector('.elements__title').textContent = popapText.value
-  cloneTemplatePhoto.querySelector('.elements__img').src = popapImg.value
+  cloneTemplatePhoto.querySelector('.elements__title').textContent = itemText
+  cloneTemplatePhoto.querySelector('.elements__img').src = itemImg
+  cloneTemplatePhoto.querySelector('.elements__img').alt = itemText
 
-  element.prepend(cloneTemplatePhoto);
-  // closepopa
-  // popapPllusOpened.classList.remove('popap-plus_opened')
-  popapPlus.classList.remove('popup_opened')
-
-
-  // likeAdd
-  const likeAdd = cloneTemplatePhoto.querySelector('.elements__like')
-  likeAdd.addEventListener('click', () => {
-    likeAdd.classList.toggle('elements__img-heart')
+  const clickLike = cloneTemplatePhoto.querySelector('.elements__like')
+  clickLike.addEventListener('click', () => {
+    clickLike.classList.toggle('elements__img-heart')
+  })
+  const deleteImg = cloneTemplatePhoto.querySelector('.elements__basket')
+  deleteImg.addEventListener('click', () => {
+    const parentBacket = deleteImg.closest('.elements__element')
+    parentBacket.remove()
   })
 
+  const openImg = cloneTemplatePhoto.querySelector('.elements__img')
+  openImg.addEventListener('click', openPopapImage)
+  return cloneTemplatePhoto
 
-});
+}
 
-
-
+formPlus.addEventListener('submit', (evt) => {
+  evt.preventDefault()
+  const creatPhotoValue = creatPhoto(popapImg.value, popapText.value)
+  element.prepend(creatPhotoValue);
+  closePopap(popapPlus)
+})
 
 
 
