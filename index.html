@@ -13,30 +13,47 @@
   <div class="page">
     <!-- popap -->
     <div class="popap popap-edit">
-      <div class="popap-edit__conteiner">
+      <div class="popap-conteiner popap-edit__conteiner">
         <button type="button" class="popap__close popap-edit__close"></button>
         <h2 class="popap-edit__text">Редактировать профиль</h2>
-        <form action="get" class="popap__form popap__form-edit" name="form">
-          <input type="text" name="autor" placeholder="Жак-Ив Кусто"
-            class="popap__input popap-edit__input popap__input_value_autor">
-          <input type="text" name="prof" placeholder="Исследователь океана"
-            class="popap__input popap-edit__input popap__input_value_prof">
-          <button type="submit" class="popap__btn popap-edit__btn">Сохранить</button>
+        <form action="get" class="popap__form popap__form-edit" name="form" novalidate>
+          <!-- <fieldset> -->
+          <div class="popap__form-conteiner">
+            <input type="text" name="autor" placeholder="Имя" id="email-input"
+              class="popap__input popap-edit__input popap__input_value_autor" minlength="2" maxlength="40" required>
+            <span class="email-input-error popap__input-error"></span>
+          </div>
+
+          <div class="popap__form-conteiner">
+            <input type="text" name="prof" placeholder="О себе"
+              class="popap__input popap-edit__input popap__input_value_prof" id="text-input" minlength="2"
+              maxlength="200" required>
+            <span class="text-input-error popap__input-error"></span>
+          </div>
+          <button type="submit" class="popap__button popap__btn popap-edit__btn popap__button">Сохранить</button>
+          <!-- </fieldset> -->
         </form>
       </div>
 
     </div>
     <!-- popap plus -->
     <div class="popap popap-plus">
-      <div class="popap-plus__conteiner">
+      <div class="popap-conteiner popap-plus__conteiner">
         <button type="button" class="popap__close popap-plus__close"></button>
         <h2 class="popap-plus__text">Новое место</h2>
-        <form action="get" class="popap__form popap-plus__form" name="forms">
-          <input type="text" name="autors" placeholder="Название"
-            class="popap__input popap-plus__input popap-plus__input_value_autor">
-          <input type="text" name="profs" placeholder="Ссылка на картинку"
-            class="popap__input  popap-plus__input popap-plus__input_value_prof">
-          <button type="submit" class="popap__btn popap-plus__btn">Создать</button>
+        <form action="get" class="popap__form popap-plus__form" name="forms" novalidate>
+          <div class="popap__form-conteiner">
+            <input id="textplus-input" type="text" name="autors" placeholder="Название"
+              class="popap__input popap-plus__input popap-plus__input_value_autor" minlength="2" maxlength="30"
+              required>
+            <span class="textplus-input-error popap__input-error"></span>
+          </div>
+          <div class="popap__form-conteiner">
+            <input id="ulrplus-input" type="url" name="profs" placeholder="Ссылка на картинку"
+              class="popap__input  popap-plus__input popap-plus__input_value_prof" required>
+            <span class="ulrplus-input-error popap__input-error"></span>
+          </div>
+          <button type="submit" class="popap__button popap__btn popap-plus__btn">Создать</button>
         </form>
       </div>
 
@@ -45,7 +62,7 @@
     <!-- popap img -->
 
     <div class=" popap popap-photo">
-      <div class="popap-photo__conteiner">
+      <div class="popap-conteiner popap-photo__conteiner">
         <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
           class="popap-photo__img" alt="">
         <p class="popap-photo__text"></p>
@@ -150,6 +167,7 @@
     </div>
   </template>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>

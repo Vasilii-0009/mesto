@@ -19,7 +19,20 @@ const popapText = document.querySelector('.popap-plus__input_value_autor');
 const popapImg = document.querySelector('.popap-plus__input_value_prof');
 const element = document.querySelector('.elements');
 const popapsCloses = document.querySelectorAll('.popap__close');
+const popap = document.querySelectorAll('.popap')
 
+popap.forEach((popapItem) => {
+  const closeButton = popapItem.closest('.popap')
+  popapItem.addEventListener('click', () => closePopap(closeButton))
+})
+
+
+const popapConteiner = document.querySelectorAll('.popap-conteiner')
+popapConteiner.forEach((popapConteinerItem) => {
+  popapConteinerItem.addEventListener('click', (evt) => {
+    evt.stopPropagation()
+  })
+})
 
 
 //общая функция открытия попапов 
@@ -55,7 +68,17 @@ formElement.addEventListener('submit', renameInput)
 
 popapsCloses.forEach((button) => {
   const closeButton = button.closest('.popap')
-  closeButton.addEventListener('click', () => closePopap(closeButton))
+  button.addEventListener('click', () => closePopap(closeButton))
+})
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    popap.forEach((popapItem) => {
+      popapItem.classList.remove('popup_opened')
+    })
+
+  }
+
 })
 const initialCards = [
   {

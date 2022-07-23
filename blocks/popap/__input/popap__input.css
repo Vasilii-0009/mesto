@@ -11,9 +11,9 @@
   color: #000;
 }
 
-.popap__input:first-child {
+/* .popap__input:first-child {
   margin-bottom: 30px;
-}
+} */
 
 .popap__input::placeholder {
   color: #000;
