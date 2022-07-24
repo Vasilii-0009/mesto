@@ -1,11 +1,11 @@
-const config = ({
-  formSelector: '.popap__form',
-  inputSelector: '.popap__input',
-  submitButtonSelector: '.popap__button',
-  inactiveButtonClass: 'popap__button_disabled',
-  inputErrorClass: 'popap__input_type_error',
-  errorClass: 'popap__error_visible',
-});
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
 
 
 const showInputError = (forlmElementParam, formInputParam, errorMessage, { inputErrorClass, errorClass, }) => {
@@ -34,7 +34,6 @@ const isValid = (forlmElementParam, formInputParam, { ...rest }) => {
 function setEventListeners(forlmElementParam, { inputSelector, submitButtonSelector, ...rest }) {
   const inputList = Array.from(forlmElementParam.querySelectorAll(inputSelector))
   const buttonElement = forlmElementParam.querySelector(submitButtonSelector)
-  console.log(buttonElement)
   toggleButtonState(inputList, buttonElement, rest)
   inputList.forEach((formInputParam) => {
     formInputParam.addEventListener('input', function () {
@@ -57,6 +56,7 @@ function toggleButtonState(inputList, buttonElement, { inactiveButtonClass }) {
     buttonElement.setAttribute('disabled', true)
     buttonElement.classList.add(inactiveButtonClass);
 
+
   } else {
     buttonElement.removeAttribute('disabled', true)
     buttonElement.classList.remove(inactiveButtonClass);
@@ -68,12 +68,9 @@ function toggleButtonState(inputList, buttonElement, { inactiveButtonClass }) {
 function enableValidation({ formSelector, ...rest }) {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((forlmElementParam) => {
-    forlmElementParam.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
     setEventListeners(forlmElementParam, rest);
   });
 }
-enableValidation(config)
+
 
 

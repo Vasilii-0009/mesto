@@ -11,72 +11,13 @@
 
 <body>
   <div class="page">
-    <!-- popap -->
-    <div class="popap popap-edit">
-      <div class="popap-conteiner popap-edit__conteiner">
-        <button type="button" class="popap__close popap-edit__close"></button>
-        <h2 class="popap-edit__text">Редактировать профиль</h2>
-        <form action="get" class="popap__form popap__form-edit" name="form" novalidate>
-          <!-- <fieldset> -->
-          <div class="popap__form-conteiner">
-            <input type="text" name="autor" placeholder="Имя" id="email-input"
-              class="popap__input popap-edit__input popap__input_value_autor" minlength="2" maxlength="40" required>
-            <span class="email-input-error popap__input-error"></span>
-          </div>
-
-          <div class="popap__form-conteiner">
-            <input type="text" name="prof" placeholder="О себе"
-              class="popap__input popap-edit__input popap__input_value_prof" id="text-input" minlength="2"
-              maxlength="200" required>
-            <span class="text-input-error popap__input-error"></span>
-          </div>
-          <button type="submit" class="popap__button popap__btn popap-edit__btn popap__button">Сохранить</button>
-          <!-- </fieldset> -->
-        </form>
-      </div>
-
-    </div>
-    <!-- popap plus -->
-    <div class="popap popap-plus">
-      <div class="popap-conteiner popap-plus__conteiner">
-        <button type="button" class="popap__close popap-plus__close"></button>
-        <h2 class="popap-plus__text">Новое место</h2>
-        <form action="get" class="popap__form popap-plus__form" name="forms" novalidate>
-          <div class="popap__form-conteiner">
-            <input id="textplus-input" type="text" name="autors" placeholder="Название"
-              class="popap__input popap-plus__input popap-plus__input_value_autor" minlength="2" maxlength="30"
-              required>
-            <span class="textplus-input-error popap__input-error"></span>
-          </div>
-          <div class="popap__form-conteiner">
-            <input id="ulrplus-input" type="url" name="profs" placeholder="Ссылка на картинку"
-              class="popap__input  popap-plus__input popap-plus__input_value_prof" required>
-            <span class="ulrplus-input-error popap__input-error"></span>
-          </div>
-          <button type="submit" class="popap__button popap__btn popap-plus__btn">Создать</button>
-        </form>
-      </div>
-
-    </div>
-
-    <!-- popap img -->
-
-    <div class=" popap popap-photo">
-      <div class="popap-conteiner popap-photo__conteiner">
-        <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-          class="popap-photo__img" alt="">
-        <p class="popap-photo__text"></p>
-        <button type="button" class="popap__close popap-photo__btn"></button>
-      </div>
-    </div>
-
     <!-- header -->
     <header class="header">
       <img src="./images/logo.svg" alt="Логотип" class="header__logo">
     </header>
 
     <main>
-      <section class="profile conteiner">
+      <section class="profile container">
         <img src="./images/Avatar.jpg" alt="Аватарка" class="profile__img">
         <div class="profile__info">
           <div class="profile__box">
@@ -90,74 +31,18 @@
 
       </section>
 
-      <section class="elements conteiner">
-        <!-- <div class="elements__element">
-          <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements__img">
-          <div class="elements__box">
-            <h2 class="elements__title">Карачаевск</h2>
-            <button type="button" class="elements__like">
-            </button>
-          </div>
-          <button type="button" class="elements__basket"></button>
-        </div>
-
-        <div class="elements__element">
-          <img src="./images/elibrus.jpg" alt="Гора Эльбрус" class="elements__img">
-          <div class="elements__box">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button type="button" class="elements__like">
-            </button>
-          </div>
-        </div>
-
-        <div class="elements__element">
-          <img src="./images/dombai.jpg" alt="Домбай" class="elements__img">
-          <div class="elements__box">
-            <h2 class="elements__title">Домбай</h2>
-            <button type="button" class="elements__like">
-            </button>
-          </div>
-        </div>
-        <div class="elements__element">
-          <img src="./images/elibrus.jpg" alt="Гора Эльбрус" class="elements__img">
-          <div class="elements__box">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button type="button" class="elements__like">
-            </button>
-          </div>
-        </div>
-
-        <div class="elements__element">
-          <img src="./images/dombai.jpg" alt="Домбай" class="elements__img">
-          <div class="elements__box">
-            <h2 class="elements__title">Домбай</h2>
-            <button type="button" class="elements__like">
-            </button>
-          </div>
-        </div>
-
-        <div class="elements__element">
-          <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements__img">
-          <div class="elements__box">
-            <h2 class="elements__title">Карачаево-Черкесская Республика</h2>
-            <button type="button" class="elements__like">
-            </button>
-          </div>
-        </div> -->
-
-
+      <section class="elements container">
       </section>
     </main>
 
-    <footer class="footer conteiner">
+    <footer class="footer container">
       <p class="footer__text">&#169; 2020 Mesto Russia</p>
     </footer>
   </div>
   <!-- template -->
   <template id="elements__element">
     <div class="elements__element">
-      <img alt="" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-        class="elements__img">
+      <img alt="" src="" class="elements__img">
       <div class="elements__box">
         <h2 class="elements__title"></h2>
         <button type="button" class="elements__like">
@@ -166,8 +51,68 @@
       <button type="button" class="elements__basket"></button>
     </div>
   </template>
-  <script src="./scripts/index.js"></script>
+
+  <!-- popup -->
+  <div class="popup popup-edit popup__close-too">
+    <div class="popup-container popup-edit__container">
+      <button type="button" class="popup__close-too popup__close popup-edit__close"></button>
+      <h2 class="popup-edit__text">Редактировать профиль</h2>
+      <form action="get" class="popup__form popup__form-edit" name="form" novalidate>
+
+        <div class="popup__form-container">
+          <input type="text" name="autor" placeholder="Имя" id="email-input"
+            class="popup__input popup-edit__input popup__input_value_autor" minlength="2" maxlength="40" required>
+          <span class="email-input-error popup__input-error"></span>
+        </div>
+
+        <div class="popup__form-container">
+          <input type="text" name="prof" placeholder="О себе"
+            class="popup__input popup-edit__input popup__input_value_prof" id="text-input" minlength="2" maxlength="200"
+            required>
+          <span class="text-input-error popup__input-error"></span>
+        </div>
+        <button type="submit" class="popup__button popup__btn popup-edit__btn popup__button">Сохранить</button>
+
+      </form>
+    </div>
+
+  </div>
+  <!-- popup plus -->
+  <div class="popup popup-add popup__close-too">
+    <div class="popup-container popup-add__container">
+      <button type="button" class="popup__close-too popup__close popup-add__close"></button>
+      <h2 class="popup-add__text">Новое место</h2>
+      <form action="get" class="popup__form popup-add__form" name="forms" novalidate>
+        <div class="popup__form-container">
+          <input id="textplus-input" type="text" name="autors" placeholder="Название"
+            class="popup__input popup-add__input popup-add__input_value_autor" minlength="2" maxlength="30" required>
+          <span class="textplus-input-error popup__input-error"></span>
+        </div>
+        <div class="popup__form-container">
+          <input id="ulrplus-input" type="url" name="profs" placeholder="Ссылка на картинку"
+            class="popup__input  popup-add__input popup-add__input_value_prof" required>
+          <span class="ulrplus-input-error popup__input-error"></span>
+        </div>
+        <button type="submit" class="popup__button popup__btn popup-add__btn">Создать</button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- popup img -->
+
+  <div class=" popup popup-photo popup__close-too">
+    <div class="popup-container popup-photo__container">
+      <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" class="popup-photo__img"
+        alt="">
+      <p class="popup-photo__text"></p>
+      <button type="button" class="popup__close-too popup__close popup-photo__btn"></button>
+    </div>
+  </div>
+
   <script src="./scripts/validate.js"></script>
+  <script src="./scripts/index.js"></script>
+
 </body>
 
 </html>
