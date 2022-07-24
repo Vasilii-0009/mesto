@@ -56,7 +56,7 @@ paddCardButton.addEventListener('click', function openPopupProfile() {
   openpopup(popupPlus)
 }
 
-) // общая функция удаления попапа
+) //  функция удаления попапа
 // const popupClose = document.querySelector('.popup-edit__close');
 
 function closepopup(closepopup) {
