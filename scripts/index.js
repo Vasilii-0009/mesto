@@ -17,15 +17,20 @@ const formPlus = document.querySelector('.popup-add__form');
 const popupText = document.querySelector('.popup-add__input_value_autor');
 const popupImg = document.querySelector('.popup-add__input_value_prof');
 const element = document.querySelector('.elements');
-const closePopupButtons = document.querySelectorAll('.popup-edit__close');
+
 const popups = document.querySelectorAll('.popup');
-const popup = document.querySelectorAll('.popup__close')
+const popupCloseBtn = document.querySelectorAll('.popup__close')
 const popupContainers = document.querySelectorAll('.popup-container')
 const popupButtons = document.querySelector('.popup-add__btn')
 
-closePopupButtons.forEach((popupItem) => {
+popupCloseBtn.forEach((popupItem) => {
   const popup = popupItem.closest('.popup')
   popupItem.addEventListener('click', () => closepopup(popup))
+})
+
+popups.forEach((popupItem) => {
+
+  popupItem.addEventListener('click', () => closepopup(popupItem))
 })
 
 
