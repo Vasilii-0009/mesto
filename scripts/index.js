@@ -5,67 +5,71 @@ const inputAutor = document.querySelector('.popup__input_value_autor');
 const inputProf = document.querySelector('.popup__input_value_prof');
 const nameInput = document.querySelector('.profile__autor');
 const jobInput = document.querySelector('.profile__text');
-const paddCardButton = document.querySelector('.profile__add');
+const addCardButton = document.querySelector('.profile__add');
 const popupPlus = document.querySelector('.popup-add');
 
 const popupCloseImg = document.querySelector('.popup-photo__btn');
 const popupPhoto = document.querySelector('.popup-photo');
-const popupCloseAddBtn = document.querySelector('.popup-add__close');
+// const popupCloseAddBtn = document.querySelector('.popup-edit__close');
 const popupPhotoImg = document.querySelector('.popup-photo__img');
 const popupPhotoText = document.querySelector('.popup-photo__text');
 const formPlus = document.querySelector('.popup-add__form');
 const popupText = document.querySelector('.popup-add__input_value_autor');
 const popupImg = document.querySelector('.popup-add__input_value_prof');
 const element = document.querySelector('.elements');
-
 const popups = document.querySelectorAll('.popup');
-const popupCloseBtn = document.querySelectorAll('.popup__close')
-const popupContainers = document.querySelectorAll('.popup-container')
-const popupButtons = document.querySelector('.popup-add__btn')
+const popupButtonsAdds = document.querySelector('.popup-add__btn')
 
-popupCloseBtn.forEach((popupItem) => {
-  const popup = popupItem.closest('.popup')
-  popupItem.addEventListener('click', () => closepopup(popup))
-})
+
+
+
 
 popups.forEach((popupItem) => {
-
-  popupItem.addEventListener('click', () => closepopup(popupItem))
+  popupItem.addEventListener('click', (evt) => {
+    if (evt.target === popupItem || evt.target === popupItem.querySelector('.popup__close')) {
+      closePopup(popupItem)
+    }
+  })
 })
 
 
 
+//общая функция открытия попапов и удаление по esc
 
-popupContainers.forEach((popupContainerItem) => {
-  popupContainerItem.addEventListener('click', (evt) => {
-    evt.stopPropagation()
-  })
-}
-
-) //общая функция открытия попапов 
-
-function openpopup(popup) {
+function openPopup(popup) {
   popup.classList.add('popup_opened')
+  const openPopup = document.querySelector('.popup_opened');
+
+  const closePopupEsc = (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(openPopup)
+      document.removeEventListener('keydown', closePopupEsc)
+    }
+  }
+  document.addEventListener('keydown', closePopupEsc)
 }
+
+
 
 // edit
 profileBtnEdit.addEventListener('click', function openPopupProfile() {
-  openpopup(popupEdit)
+  openPopup(popupEdit)
   inputAutor.value = nameInput.textContent
   inputProf.value = jobInput.textContent
 }
 
-) //plus
-
-paddCardButton.addEventListener('click', function openPopupProfile() {
-  openpopup(popupPlus)
+)
+//plus
+addCardButton.addEventListener('click', function openPopupProfile() {
+  openPopup(popupPlus)
 }
 
-) //  функция удаления попапа
-// const popupClose = document.querySelector('.popup__closes');
+)
 
-function closepopup(closepopup) {
-  closepopup.classList.remove('popup_opened')
+//  функция удаления попапа
+function closePopup(closePopup) {
+  closePopup.classList.remove('popup_opened')
+
 }
 
 //edit
@@ -73,32 +77,14 @@ function submitProfileEditForm(evt) {
   evt.preventDefault();
   nameInput.textContent = inputAutor.value
   jobInput.textContent = inputProf.value
-  closepopup(popupEdit)
+  closePopup(popupEdit)
 }
 
 popupFormEdit.addEventListener('submit', submitProfileEditForm)
 
-// closePopupButtons.forEach((button) => {
-//   const popup = button.closest('.popup')
-//   button.addEventListener('click', () => closepopup(popup))
-// })
 
-function activItem(pop) {
-  pop.forEach((popItem) => {
-    if (popItem.classList.contains('popup_opened')) {
-      popItem.classList.remove('popup_opened')
 
-    }
-  })
 
-}
-document.addEventListener('keydown', (evt) => {
-
-  if (evt.key === 'Escape') {
-    activItem(popups)
-  }
-
-})
 
 
 
@@ -166,7 +152,7 @@ function creatPhoto(itemCard, itemText) {
   )
   const openImg = newTemplateCard.querySelector('.elements__img')
   openImg.addEventListener('click', () => {
-    openpopup(popupPhoto)
+    openPopup(popupPhoto)
     popupPhotoImg.src = newTemplateCard.querySelector('.elements__img').src
     popupPhotoImg.alt = newTemplateCard.querySelector('.elements__title').textContent
     popupPhotoText.textContent = newTemplateCard.querySelector('.elements__title').textContent
@@ -183,7 +169,7 @@ formPlus.addEventListener('submit', (evt) => {
   creatPhoto(popupImg.value = "", popupText.value = "")
   popupButtons.setAttribute('disabled', true)
   popupButtons.classList.add('popup__button_disabled');
-  closepopup(popupPlus)
+  closePopup(popupPlus)
 }
 
 )
@@ -191,7 +177,6 @@ initialCards.forEach((initialCardsItemx) => {
   const newCard = creatPhoto(initialCardsItemx.link, initialCardsItemx.name)
   element.append(newCard);
 
-}
+})
 
-)
 enableValidation(config)
