@@ -7,21 +7,23 @@ const nameInput = document.querySelector('.profile__autor');
 const jobInput = document.querySelector('.profile__text');
 const addCardButton = document.querySelector('.profile__add');
 const popupPlus = document.querySelector('.popup-add');
-
 const popupCloseImg = document.querySelector('.popup-photo__btn');
 const popupPhoto = document.querySelector('.popup-photo');
-// const popupCloseAddBtn = document.querySelector('.popup-edit__close');
 const popupPhotoImg = document.querySelector('.popup-photo__img');
 const popupPhotoText = document.querySelector('.popup-photo__text');
 const formPlus = document.querySelector('.popup-add__form');
 const popupText = document.querySelector('.popup-add__input_value_autor');
 const popupImg = document.querySelector('.popup-add__input_value_prof');
-const element = document.querySelector('.elements');
+const elements = document.querySelector('.elements');
 const popups = document.querySelectorAll('.popup');
-const popupButtonsAdds = document.querySelector('.popup-add__btn')
-
-
-
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
 
 
 popups.forEach((popupItem) => {
@@ -32,20 +34,18 @@ popups.forEach((popupItem) => {
   })
 })
 
-
-
 //общая функция открытия попапов и удаление по esc
+
+function closePopupEsc(evt,) {
+  const openPopup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(openPopup)
+
+  }
+}
 
 function openPopup(popup) {
   popup.classList.add('popup_opened')
-  const openPopup = document.querySelector('.popup_opened');
-
-  const closePopupEsc = (evt) => {
-    if (evt.key === 'Escape') {
-      closePopup(openPopup)
-      document.removeEventListener('keydown', closePopupEsc)
-    }
-  }
   document.addEventListener('keydown', closePopupEsc)
 }
 
@@ -69,6 +69,7 @@ addCardButton.addEventListener('click', function openPopupProfile() {
 //  функция удаления попапа
 function closePopup(closePopup) {
   closePopup.classList.remove('popup_opened')
+  document.removeEventListener('keydown', closePopupEsc)
 
 }
 
@@ -81,11 +82,6 @@ function submitProfileEditForm(evt) {
 }
 
 popupFormEdit.addEventListener('submit', submitProfileEditForm)
-
-
-
-
-
 
 
 const initialCards = [{
@@ -127,12 +123,11 @@ const initialCards = [{
 ];
 
 
-
 // photoAdd
 const templatePhoto = document.querySelector('#elements__element').content;
 
 
-function creatPhoto(itemCard, itemText) {
+function createPhoto(itemCard, itemText) {
 
   const newTemplateCard = templatePhoto.querySelector('.elements__element').cloneNode(true)
   newTemplateCard.querySelector('.elements__title').textContent = itemText
@@ -141,41 +136,37 @@ function creatPhoto(itemCard, itemText) {
   const buttonLike = newTemplateCard.querySelector('.elements__like')
   buttonLike.addEventListener('click', () => {
     buttonLike.classList.toggle('elements__img-heart')
-  }
+  })
 
-  )
+
   const deleteBtn = newTemplateCard.querySelector('.elements__basket')
   deleteBtn.addEventListener('click', () => {
     deleteBtn.closest('.elements__element').remove()
-  }
-
-  )
+  })
   const openImg = newTemplateCard.querySelector('.elements__img')
   openImg.addEventListener('click', () => {
     openPopup(popupPhoto)
     popupPhotoImg.src = newTemplateCard.querySelector('.elements__img').src
     popupPhotoImg.alt = newTemplateCard.querySelector('.elements__title').textContent
     popupPhotoText.textContent = newTemplateCard.querySelector('.elements__title').textContent
-  }
+  })
 
-  )
   return newTemplateCard
 }
 
 formPlus.addEventListener('submit', (evt) => {
   evt.preventDefault()
-  const newCard = creatPhoto(popupImg.value, popupText.value)
-  element.prepend(newCard);
-  creatPhoto(popupImg.value = "", popupText.value = "")
+  const newCard = createPhoto(popupImg.value, popupText.value)
+  elements.prepend(newCard);
+  createPhoto(popupImg.value = "", popupText.value = "")
   popupButtons.setAttribute('disabled', true)
   popupButtons.classList.add('popup__button_disabled');
   closePopup(popupPlus)
-}
+})
 
-)
 initialCards.forEach((initialCardsItemx) => {
-  const newCard = creatPhoto(initialCardsItemx.link, initialCardsItemx.name)
-  element.append(newCard);
+  const newCard = createPhoto(initialCardsItemx.link, initialCardsItemx.name)
+  elements.append(newCard);
 
 })
 
