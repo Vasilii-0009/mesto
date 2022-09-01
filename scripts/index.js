@@ -36,7 +36,7 @@ popups.forEach((popupItem) => {
 
 //общая функция открытия попапов и удаление по esc
 
-function closePopupEsc(evt,) {
+function closePopupEsc(evt) {
   const openPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
     closePopup(openPopup)
@@ -159,8 +159,7 @@ formPlus.addEventListener('submit', (evt) => {
   const newCard = createPhoto(popupImg.value, popupText.value)
   elements.prepend(newCard);
   createPhoto(popupImg.value = "", popupText.value = "")
-  popupButtons.setAttribute('disabled', true)
-  popupButtons.classList.add('popup__button_disabled');
+
   closePopup(popupPlus)
 })
 
