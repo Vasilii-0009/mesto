@@ -1,3 +1,6 @@
+import { Card } from './card.js'
+import { formValidator } from './formValidator.js'
+
 const popupFormEdit = document.querySelector('.popup__form-edit');
 const profileBtnEdit = document.querySelector('.profile__btn-edit');
 const popupEdit = document.querySelector('.popup-edit');
@@ -16,14 +19,7 @@ const popupText = document.querySelector('.popup-add__input_value_autor');
 const popupImg = document.querySelector('.popup-add__input_value_prof');
 const elements = document.querySelector('.elements');
 const popups = document.querySelectorAll('.popup');
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-};
+
 
 
 popups.forEach((popupItem) => {
@@ -163,10 +159,11 @@ formPlus.addEventListener('submit', (evt) => {
   closePopup(popupPlus)
 })
 
-initialCards.forEach((initialCardsItemx) => {
-  const newCard = createPhoto(initialCardsItemx.link, initialCardsItemx.name)
-  elements.append(newCard);
+// initialCards.forEach((initialCardsItemx) => {
+//   const newCard = createPhoto(initialCardsItemx.link, initialCardsItemx.name)
+//   elements.append(newCard);
 
-})
+// })
 
-enableValidation(config)
+//enableValidation(config)
+export { popupPhoto, popupPhotoImg, popupPhotoText, openPopup, }
