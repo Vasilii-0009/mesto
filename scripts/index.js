@@ -1,5 +1,5 @@
 import { Card } from './card.js'
-import { formValidator } from './formValidator.js'
+import { FormValidator } from './formValidator.js'
 
 const popupFormEdit = document.querySelector('.popup__form-edit');
 const profileBtnEdit = document.querySelector('.profile__btn-edit');
@@ -19,6 +19,22 @@ const popupText = document.querySelector('.popup-add__input_value_autor');
 const popupImg = document.querySelector('.popup-add__input_value_prof');
 const elements = document.querySelector('.elements');
 const popups = document.querySelectorAll('.popup');
+
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
+
+const resFormValidator = new FormValidator(config, popupFormEdit)
+resFormValidator.enableValidation()
+
+
+const showFormValidator = new FormValidator(config, formPlus)
+showFormValidator.enableValidation()
 
 
 
@@ -49,7 +65,11 @@ function openPopup(popup) {
 
 // edit
 profileBtnEdit.addEventListener('click', function openPopupProfile() {
+
+  resFormValidator.resetValidationErrors()
+  resFormValidator.disableButton()
   openPopup(popupEdit)
+
   inputAutor.value = nameInput.textContent
   inputProf.value = jobInput.textContent
 }
@@ -57,6 +77,8 @@ profileBtnEdit.addEventListener('click', function openPopupProfile() {
 )
 //plus
 addCardButton.addEventListener('click', function openPopupProfile() {
+  showFormValidator.resetValidationErrors()
+  showFormValidator.disableButton()
   openPopup(popupPlus)
 }
 
@@ -75,6 +97,7 @@ function submitProfileEditForm(evt) {
   nameInput.textContent = inputAutor.value
   jobInput.textContent = inputProf.value
   closePopup(popupEdit)
+
 }
 
 popupFormEdit.addEventListener('submit', submitProfileEditForm)
@@ -114,56 +137,76 @@ const initialCards = [{
 {
   name: 'Байкал',
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-}
-
-];
+}];
 
 
 // photoAdd
-const templatePhoto = document.querySelector('#elements__element').content;
+
+// const templatePhoto = document.querySelector('#elements__element').content;
 
 
-function createPhoto(itemCard, itemText) {
+// function createPhoto(itemCard, itemText) {
 
-  const newTemplateCard = templatePhoto.querySelector('.elements__element').cloneNode(true)
-  newTemplateCard.querySelector('.elements__title').textContent = itemText
-  newTemplateCard.querySelector('.elements__img').src = itemCard
-  newTemplateCard.querySelector('.elements__img').alt = itemText
-  const buttonLike = newTemplateCard.querySelector('.elements__like')
-  buttonLike.addEventListener('click', () => {
-    buttonLike.classList.toggle('elements__img-heart')
-  })
+//   const newTemplateCard = templatePhoto.querySelector('.elements__element').cloneNode(true)
+//   newTemplateCard.querySelector('.elements__title').textContent = itemText
+//   newTemplateCard.querySelector('.elements__img').src = itemCard
+//   newTemplateCard.querySelector('.elements__img').alt = itemText
+//   const buttonLike = newTemplateCard.querySelector('.elements__like')
+//   buttonLike.addEventListener('click', () => {
+//     buttonLike.classList.toggle('elements__img-heart')
+//   })
 
 
-  const deleteBtn = newTemplateCard.querySelector('.elements__basket')
-  deleteBtn.addEventListener('click', () => {
-    deleteBtn.closest('.elements__element').remove()
-  })
-  const openImg = newTemplateCard.querySelector('.elements__img')
-  openImg.addEventListener('click', () => {
-    openPopup(popupPhoto)
-    popupPhotoImg.src = newTemplateCard.querySelector('.elements__img').src
-    popupPhotoImg.alt = newTemplateCard.querySelector('.elements__title').textContent
-    popupPhotoText.textContent = newTemplateCard.querySelector('.elements__title').textContent
-  })
+//   const deleteBtn = newTemplateCard.querySelector('.elements__basket')
+//   deleteBtn.addEventListener('click', () => {
+//     deleteBtn.closest('.elements__element').remove()
+//   })
+//   const openImg = newTemplateCard.querySelector('.elements__img')
+//   openImg.addEventListener('click', () => {
+//     openPopup(popupPhoto)
+//     popupPhotoImg.src = newTemplateCard.querySelector('.elements__img').src
+//     popupPhotoImg.alt = newTemplateCard.querySelector('.elements__title').textContent
+//     popupPhotoText.textContent = newTemplateCard.querySelector('.elements__title').textContent
+//   })
 
-  return newTemplateCard
-}
+//   return newTemplateCard
+// }
 
 formPlus.addEventListener('submit', (evt) => {
   evt.preventDefault()
-  const newCard = createPhoto(popupImg.value, popupText.value)
-  elements.prepend(newCard);
-  createPhoto(popupImg.value = "", popupText.value = "")
 
+  const newCard = {
+    name: popupText.value,
+    link: popupImg.value,
+  }
+
+  console.log(newCard.name)
+  const card = creatCard(newCard)
+
+  elements.prepend(card)
+
+  newCard.name = ""
+  newCard.link = ""
+  // showFormValidator.resetValidationErrors()
+  //showFormValidator.disableButton()
   closePopup(popupPlus)
 })
 
-// initialCards.forEach((initialCardsItemx) => {
-//   const newCard = createPhoto(initialCardsItemx.link, initialCardsItemx.name)
-//   elements.append(newCard);
 
-// })
 
-//enableValidation(config)
-export { popupPhoto, popupPhotoImg, popupPhotoText, openPopup, }
+
+function handleOpenPopup(name, link) {
+  openPopup(popupPhoto)
+  popupPhotoImg.src = link,
+    popupPhotoImg.alt = name,
+    popupPhotoText.textContent = name
+
+}
+function creatCard(data) {
+  const form = new Card(data, '#elements__element', handleOpenPopup)
+  return form.generateCard()
+}
+initialCards.forEach((initialCardsItem) => {
+
+  elements.append(creatCard(initialCardsItem))
+})
