@@ -45,7 +45,7 @@ class Card {
   }
 
   _deleteCard(elemntBascket) {
-    elemntBascket.closest('.elements__element').remove()
+    elemntBascket.closest(this._element.remove())
   }
 
   _openPopups() {

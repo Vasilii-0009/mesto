@@ -1,5 +1,6 @@
 import { Card } from './card.js'
 import { FormValidator } from './formValidator.js'
+import { initialCards } from './cards.js'
 
 const popupFormEdit = document.querySelector('.popup__form-edit');
 const profileBtnEdit = document.querySelector('.profile__btn-edit');
@@ -29,12 +30,12 @@ const config = {
   errorClass: 'popup__error_visible',
 };
 
-const resFormValidator = new FormValidator(config, popupFormEdit)
-resFormValidator.enableValidation()
+const profileEditFormValidator = new FormValidator(config, popupFormEdit)
+profileEditFormValidator.enableValidation()
 
 
-const showFormValidator = new FormValidator(config, formPlus)
-showFormValidator.enableValidation()
+const addCardFormValidator = new FormValidator(config, formPlus)
+addCardFormValidator.enableValidation()
 
 
 
@@ -49,8 +50,9 @@ popups.forEach((popupItem) => {
 //общая функция открытия попапов и удаление по esc
 
 function closePopupEsc(evt) {
-  const openPopup = document.querySelector('.popup_opened');
+
   if (evt.key === 'Escape') {
+    const openPopup = document.querySelector('.popup_opened');
     closePopup(openPopup)
 
   }
@@ -66,8 +68,8 @@ function openPopup(popup) {
 // edit
 profileBtnEdit.addEventListener('click', function openPopupProfile() {
 
-  resFormValidator.resetValidationErrors()
-  resFormValidator.disableButton()
+  profileEditFormValidator.resetValidationErrors()
+  profileEditFormValidator.disableButton()
   openPopup(popupEdit)
 
   inputAutor.value = nameInput.textContent
@@ -77,8 +79,8 @@ profileBtnEdit.addEventListener('click', function openPopupProfile() {
 )
 //plus
 addCardButton.addEventListener('click', function openPopupProfile() {
-  showFormValidator.resetValidationErrors()
-  showFormValidator.disableButton()
+  addCardFormValidator.resetValidationErrors()
+  addCardFormValidator.disableButton()
   openPopup(popupPlus)
 }
 
@@ -103,41 +105,7 @@ function submitProfileEditForm(evt) {
 popupFormEdit.addEventListener('submit', submitProfileEditForm)
 
 
-const initialCards = [{
-  name: 'Архыз',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
 
-}
-
-  ,
-{
-  name: 'Челябинская область',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-}
-
-  ,
-{
-  name: 'Иваново',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-}
-
-  ,
-{
-  name: 'Камчатка',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-}
-
-  ,
-{
-  name: 'Холмогорский район',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-}
-
-  ,
-{
-  name: 'Байкал',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-}];
 
 
 // photoAdd
@@ -185,11 +153,11 @@ formPlus.addEventListener('submit', (evt) => {
 
   elements.prepend(card)
 
-  newCard.name = ""
-  newCard.link = ""
-  // showFormValidator.resetValidationErrors()
-  //showFormValidator.disableButton()
+
+  // addCardFormValidator.resetValidationErrors()
+  //addCardFormValidator.disableButton()
   closePopup(popupPlus)
+  formPlus.reset()
 })
 
 
