@@ -4,8 +4,8 @@ class Card {
     this._link = data.link;
     this._templateElement = templateElement,
       this._openPopup = openPopup
-
   }
+
   _getTemplate() {
     const cardElement = document.querySelector(this._templateElement).content
     const cardItem = cardElement.querySelector('.elements__element').cloneNode(true)
@@ -23,6 +23,11 @@ class Card {
     elemntImg.src = this._link
     elemntImg.alt = this._name
 
+    this._setEventListeners(elemntLike, elemntBascket, elemntImg)
+    return this._element
+  }
+
+  _setEventListeners(elemntLike, elemntBascket, elemntImg) {
     elemntLike.addEventListener('click', () => {
       this._addLike(elemntLike)
     })
@@ -31,13 +36,10 @@ class Card {
       this._deleteCard(elemntBascket)
     })
 
-
     elemntImg.addEventListener('click', () => {
-      this._openPopups()
+      this._openImagePopup()
     })
 
-    // conteiner.append(this._element)
-    return this._element
   }
 
   _addLike(elemntLike) {
@@ -48,11 +50,9 @@ class Card {
     elemntBascket.closest(this._element.remove())
   }
 
-  _openPopups() {
-    const popupImg = this._openPopup
-    popupImg(this._name, this._link)
+  _openImagePopup() {
+    this._openPopup(this._name, this._link)
   }
-
 }
 
 export { Card }

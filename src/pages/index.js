@@ -7,7 +7,6 @@ import { PopupWithForm } from '../components/PopupWithForm.js'
 import { UserInfo } from '../components/UserInfo.js'
 import './index.css';
 
-
 const popupFormEdit = document.querySelector('.popup__form-edit');
 const profileBtnEdit = document.querySelector('.profile__btn-edit');
 const popupEdit = document.querySelector('.popup-edit');
@@ -27,7 +26,6 @@ const popupImg = document.querySelector('.popup-add__input_value_prof');
 const elements = document.querySelector('.elements');
 const popups = document.querySelectorAll('.popup');
 
-
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -40,23 +38,19 @@ const config = {
 const profileEditFormValidator = new FormValidator(config, popupFormEdit)
 profileEditFormValidator.enableValidation()
 
-
 const addCardFormValidator = new FormValidator(config, formPlus)
 addCardFormValidator.enableValidation()
-
-
-
 
 const popupWithImage = new PopupWithImage('.popup-photo')
 popupWithImage.setEventListener()
 
-//popupWithFormPlus//
-const popupWithFormPlus = new PopupWithForm('.popup-add', handleFormSubmit)
-popupWithFormPlus.setEventListener()
+//popupAddCard//
+const popupAddCard = new PopupWithForm('.popup-add', handleFormSubmit)
+popupAddCard.setEventListener()
 
 function handleFormSubmit(formData) {
   initCards.setItem(creatCard(formData))
-  popupWithFormPlus.close()
+  popupAddCard.close()
 }
 
 //popupWithFormEdit//
@@ -67,13 +61,7 @@ function handleFormSubmitEdit(formData) {
   popupWithFormEdit.close()
 }
 
-
 const userInfo = new UserInfo({ name: '.profile__autor', prof: '.profile__text' })
-
-
-
-
-
 
 // edit
 profileBtnEdit.addEventListener('click', function openPopupProfile() {
@@ -83,31 +71,24 @@ profileBtnEdit.addEventListener('click', function openPopupProfile() {
   popupWithFormEdit.open()
   userInfo.getUserInfo({ nameInput: inputAutor, profInput: inputProf })
 
-}
+})
 
-)
 //plus
 addCardButton.addEventListener('click', function openPopupProfile() {
   addCardFormValidator.resetValidationErrors()
   addCardFormValidator.disableButton()
-  popupWithFormPlus.open()
+  popupAddCard.open()
 
-}
-
-)
-
-
+})
 
 function handleCardClick(name, link) {
-
   popupWithImage.open(name, link)
-
 }
+
 function creatCard(data) {
   const form = new Card(data, '#elements__element', handleCardClick)
   return form.generateCard()
 }
-
 
 const initCards = new Section({
   data: initialCards,
@@ -117,5 +98,6 @@ const initCards = new Section({
 },
   '.elements'
 )
+
 initCards.renderItems()
 
