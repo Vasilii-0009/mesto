@@ -2,7 +2,6 @@ import { Card } from '../components/Card.js'
 import { FormValidator } from '../components/FormValidator.js'
 import { initialCards } from '../utils/cards.js'
 import { Section } from '../components/Section.js'
-//import { Popup } from './Popup.js';
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { PopupWithForm } from '../components/PopupWithForm.js'
 import { UserInfo } from '../components/UserInfo.js'
@@ -46,8 +45,7 @@ const addCardFormValidator = new FormValidator(config, formPlus)
 addCardFormValidator.enableValidation()
 
 
-// const renderPopup = new Popup('.popup')
-// renderPopup.setEventListener()
+
 
 const popupWithImage = new PopupWithImage('.popup-photo')
 popupWithImage.setEventListener()
@@ -75,30 +73,6 @@ const userInfo = new UserInfo({ name: '.profile__autor', prof: '.profile__text' 
 
 
 
-// popups.forEach((popupItem) => {
-//   popupItem.addEventListener('click', (evt) => {
-//     if (evt.target === popupItem || evt.target === popupItem.querySelector('.popup__close')) {
-//       closePopup(popupItem)
-//     }
-//   })
-// })
-
-//общая функция открытия попапов и удаление по esc
-
-// function closePopupEsc(evt) {
-
-//   if (evt.key === 'Escape') {
-//     const openPopup = document.querySelector('.popup_opened');
-//     closePopup(openPopup)
-
-//   }
-// }
-
-// function openPopup(popup) {
-//   popup.classList.add('popup_opened')
-//    document.addEventListener('keydown', closePopupEsc)
-// }
-
 
 
 // edit
@@ -109,12 +83,6 @@ profileBtnEdit.addEventListener('click', function openPopupProfile() {
   popupWithFormEdit.open()
   userInfo.getUserInfo({ nameInput: inputAutor, profInput: inputProf })
 
-  // editPopup.open()
-  //userInfo.setUserInfo({ inputName: '.popup__input_value_autor', inpuprof: '.popup__input_value_prof' })
-  //openPopup()
-
-  // inputAutor.value = nameInput.textContent
-  // inputProf.value = jobInput.textContent
 }
 
 )
@@ -123,49 +91,12 @@ addCardButton.addEventListener('click', function openPopupProfile() {
   addCardFormValidator.resetValidationErrors()
   addCardFormValidator.disableButton()
   popupWithFormPlus.open()
-  // openPopup(popupPlus)
+
 }
 
 )
 
-//  функция удаления попапа
-// function closePopup(closePopup) {
-//   closePopup.classList.remove('popup_opened')
-//   document.removeEventListener('keydown', closePopupEsc)
 
-// }
-
-//edit
-// function submitProfileEditForm(evt) {
-//   evt.preventDefault();
-//   nameInput.textContent = inputAutor.value
-//   jobInput.textContent = inputProf.value
-//   closePopup(popupEdit)
-
-// }
-
-//popupFormEdit.addEventListener('submit', submitProfileEditForm)
-
-
-
-///????//
-// formPlus.addEventListener('submit', (evt) => {
-//   evt.preventDefault()
-
-//   const newCard = {
-//     name: popupText.value,
-//     link: popupImg.value,
-//   }
-
-
-//   const card = creatCard(newCard)
-
-//   elements.prepend(card)
-
-//   closePopup(popupPlus)
-//   formPlus.reset()
-// })
-//???///
 
 function handleCardClick(name, link) {
 
@@ -176,22 +107,15 @@ function creatCard(data) {
   const form = new Card(data, '#elements__element', handleCardClick)
   return form.generateCard()
 }
-// initialCards.forEach((initialCardsItem) => {
 
-//   elements.append(creatCard(initialCardsItem))
-// })
 
 const initCards = new Section({
   data: initialCards,
   renderer: (cardItem) => {
-    // const form = new Card(cardItem, '#elements__element', handleOpenPopup)
-    // const genrerateCards = form.generateCard()
     initCards.setItem(creatCard(cardItem))
   },
 },
   '.elements'
 )
-
-
 initCards.renderItems()
-//
+
