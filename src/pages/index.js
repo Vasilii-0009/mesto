@@ -71,20 +71,20 @@ const configApi = {
 
 //creatCards with api
 const dataApi = new Api(configApi)
-dataApi.getTasks().then((Response) => {
-  const itemCard = Response.slice(0, 4)
-  initCards.renderItems(itemCard)
+dataApi.getTasks().then((response) => {
+  // const itemCard = Response.slice(0, 4)
+  initCards.renderItems(response)
 })
   .catch((err) => Promise.reject(`Картинки не добавлены (код ошибки): ${err}`));
 
 //creatCards
-function creatCard(data) {
-  const form = new Card(data, '#elements__element', handleCardClick, userInfo, dataApi, PopupConfirmDeletCard)
-  return form.generateCard()
+function createCard(data) {
+  const card = new Card(data, '#elements__element', handleCardClick, userInfo, dataApi, popupConfirmation)
+  return card.generateCard()
 }
 
-const initCards = new Section((obj) => {
-  initCards.setItem(creatCard(obj))
+const initCards = new Section((card) => {
+  initCards.setItem(createCard(card))
 },
   '.elements')
 
@@ -95,13 +95,13 @@ dataApi.getInfoUser().then((formData) => {
   .catch((err) => Promise.reject(`Данные не получены с сервира (код ошибки) : ${err}`));
 
 //popupAddCard//
-const popupAddCard = new PopupWithForm('.popup-add', handleFormSubmit)
+const popupAddCard = new PopupWithForm('.popup-add', handleAddCardSubmit)
 popupAddCard.setEventListener()
 
-function handleFormSubmit(formData) {
+function handleAddCardSubmit(formData) {
   //popupAddCard with API//
   dataApi.creatCard(formData.name, formData.link).then(res => {
-    initCards.setItem(creatCard(res))
+    initCards.setItem(createCard(res))
   })
     .catch((err) => Promise.reject(`Карточка не добавались (код ошибки): ${err}`));
   setTimeout(closePopupTimer, 1000, popupAddCard)
@@ -127,8 +127,8 @@ function handleFormSubmitEdit(formData) {
 const userInfo = new UserInfo({ name: '.profile__autor', prof: '.profile__text', avatar: '.profile__img' })
 
 //PopupWithConfirmation//
-const PopupConfirmDeletCard = new PopupWithConfirmation('.popup-delet')
-PopupConfirmDeletCard.setEventListener()
+const popupConfirmation = new PopupWithConfirmation('.popup-delet')
+popupConfirmation.setEventListener()
 
 //popupWithFormEdit avatar api//
 const popupWithFormAvatar = new PopupWithForm('.popup-avatar', handleFormSubmitAvatar)
