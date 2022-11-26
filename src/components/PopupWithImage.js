@@ -7,7 +7,7 @@ class PopupWithImage extends Popup {
     this.imageSrc = this._elementPopup.querySelector('.popup-photo__img')
     this.imageName = this._elementPopup.querySelector('.popup-photo__text')
   }
-  open(name, link) {
+  open(name, link,) {
     super.open()
     this.imageSrc.src = link,
       this.imageName.textContent = name,

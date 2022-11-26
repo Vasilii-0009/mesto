@@ -4,7 +4,9 @@ import { initialCards } from '../utils/cards.js'
 import { Section } from '../components/Section.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { PopupWithForm } from '../components/PopupWithForm.js'
+import { PopupWithConfirmation } from '../components/PopupWithConfirmation.js'
 import { UserInfo } from '../components/UserInfo.js'
+import { Api } from '../components/Api.js'
 import './index.css';
 
 const popupFormEdit = document.querySelector('.popup__form-edit');
@@ -35,40 +37,120 @@ const config = {
   errorClass: 'popup__error_visible',
 };
 
+//new const 
+const avatarConteiner = document.querySelector('.profile__container-img')
+const popupAvatar = document.querySelector('.popup-avatar')
+const avatar = document.querySelector('.profile__img')
+const btnConfirDelete = document.querySelector('.popup-delet__btn')
+const elementPoupBtn = document.querySelector('.popup__button')
+const btnAddCard = document.querySelector('.popup-add__btn')
+const btnEditProf = document.querySelector('.popup-edit__btn')
+const btnAvatar = document.querySelector('.popup-avatar__btn')
+const btnDelet = document.querySelector('.popup-delet__btn')
+
+// FormValidator popupFormEdit
 const profileEditFormValidator = new FormValidator(config, popupFormEdit)
 profileEditFormValidator.enableValidation()
 
+// FormValidator formPlus
 const addCardFormValidator = new FormValidator(config, formPlus)
 addCardFormValidator.enableValidation()
 
-const popupWithImage = new PopupWithImage('.popup-photo')
-popupWithImage.setEventListener()
+// FormValidator avatar
+const avatarFormValidator = new FormValidator(config, popupAvatar)
+avatarFormValidator.enableValidation()
+
+//class API
+const configApi = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-52',
+  headers: {
+    'Content-Type': 'application/json',
+    authorization: 'f2aec418-693a-4d30-9fa0-f227bcec820c'
+  },
+}
+
+//creatCards with api
+const dataApi = new Api(configApi)
+dataApi.getTasks().then((Response) => {
+  const itemCard = Response.slice(0, 4)
+  initCards.renderItems(itemCard)
+})
+  .catch((err) => Promise.reject(`Картинки не добавлены (код ошибки): ${err}`));
+
+//creatCards
+function creatCard(data) {
+  const form = new Card(data, '#elements__element', handleCardClick, userInfo, dataApi, PopupConfirmDeletCard)
+  return form.generateCard()
+}
+
+const initCards = new Section((obj) => {
+  initCards.setItem(creatCard(obj))
+},
+  '.elements')
+
+//getInfoUser with api
+dataApi.getInfoUser().then((formData) => {
+  userInfo.apiUserInfo(formData.name, formData.about, formData.avatar)
+})
+  .catch((err) => Promise.reject(`Данные не получены с сервира (код ошибки) : ${err}`));
 
 //popupAddCard//
 const popupAddCard = new PopupWithForm('.popup-add', handleFormSubmit)
 popupAddCard.setEventListener()
 
 function handleFormSubmit(formData) {
-  initCards.setItem(creatCard(formData))
-  popupAddCard.close()
+  //popupAddCard with API//
+  dataApi.creatCard(formData.name, formData.link).then(res => {
+    initCards.setItem(creatCard(res))
+  })
+    .catch((err) => Promise.reject(`Карточка не добавались (код ошибки): ${err}`));
+  setTimeout(closePopupTimer, 1000, popupAddCard)
+  //popupAddCard.close()
+
 }
 
-//popupWithFormEdit//
+//popupWithFormEdit
 const popupWithFormEdit = new PopupWithForm('.popup-edit', handleFormSubmitEdit)
 popupWithFormEdit.setEventListener()
-function handleFormSubmitEdit(formData) {
-  userInfo.setUserInfo(formData.inputAutor, formData.inputProf)
-  popupWithFormEdit.close()
-}
 
-const userInfo = new UserInfo({ name: '.profile__autor', prof: '.profile__text' })
+function handleFormSubmitEdit(formData) {
+  // userInfo with Api
+
+  dataApi.saveInfoUser(formData.inputName, formData.inputProf).then(data => {
+    userInfo.setUserInfo(data.name, data.about)
+
+  })
+    .catch((err) => Promise.reject(`Поля не заполнены(код шибки): ${err}`))
+  setTimeout(closePopupTimer, 1000, popupWithFormEdit)
+  // popupWithFormEdit.close()
+}
+const userInfo = new UserInfo({ name: '.profile__autor', prof: '.profile__text', avatar: '.profile__img' })
+
+//PopupWithConfirmation//
+const PopupConfirmDeletCard = new PopupWithConfirmation('.popup-delet')
+PopupConfirmDeletCard.setEventListener()
+
+//popupWithFormEdit avatar api//
+const popupWithFormAvatar = new PopupWithForm('.popup-avatar', handleFormSubmitAvatar)
+popupWithFormAvatar.setEventListener()
+
+function handleFormSubmitAvatar(formData) {
+
+  dataApi.updateAvatar(formData.inputAvatar).then((data) => {
+    avatar.src = data.avatar
+  })
+    .catch((err) => Promise.reject(`Ввели не коректный URl(код ошибки): ${err}`))
+  setTimeout(closePopupTimer, 1000, popupWithFormAvatar)
+  //popupWithFormAvatar.close()
+}
 
 // edit
 profileBtnEdit.addEventListener('click', function openPopupProfile() {
-
   profileEditFormValidator.resetValidationErrors()
   profileEditFormValidator.disableButton()
+  btnEditProf.textContent = 'Сохранить'
   popupWithFormEdit.open()
+
   userInfo.getUserInfo({ nameInput: inputAutor, profInput: inputProf })
 
 })
@@ -77,27 +159,39 @@ profileBtnEdit.addEventListener('click', function openPopupProfile() {
 addCardButton.addEventListener('click', function openPopupProfile() {
   addCardFormValidator.resetValidationErrors()
   addCardFormValidator.disableButton()
+  btnAddCard.textContent = 'Создать'
   popupAddCard.open()
 
 })
+// edit avatar 
+avatarConteiner.addEventListener('click', () => {
+  avatarFormValidator.disableButton()
+  btnAvatar.textContent = 'Сохранить'
+  popupWithFormAvatar.open()
+})
 
-function handleCardClick(name, link) {
-  popupWithImage.open(name, link)
+//popupWithImage
+const popupWithImage = new PopupWithImage('.popup-photo')
+popupWithImage.setEventListener()
+
+function handleCardClick(name, link, number) {
+  popupWithImage.open(name, link, number)
 }
 
-function creatCard(data) {
-  const form = new Card(data, '#elements__element', handleCardClick)
-  return form.generateCard()
+// const initCards = new Section({
+//   data: initialCards,
+//   renderer: (cardItem) => {
+//     initCards.setItem(creatCard(cardItem))
+//   },
+// },
+//   '.elements'
+// )
+// initCards.renderItems()
+
+
+
+function closePopupTimer(elementPopup) {
+  elementPopup.close()
 }
 
-const initCards = new Section({
-  data: initialCards,
-  renderer: (cardItem) => {
-    initCards.setItem(creatCard(cardItem))
-  },
-},
-  '.elements'
-)
-
-initCards.renderItems()
 
