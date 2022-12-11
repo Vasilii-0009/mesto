@@ -1,23 +1,28 @@
 class UserInfo {
-  constructor({ name, prof, avatar }) {
-    this._elementName = document.querySelector(name),
-      this._elementProf = document.querySelector(prof)
-    this._elemntImg = document.querySelector(avatar)
+  constructor({ nameSelector, profSelector, avatarSelector }) {
+    this._elementName = document.querySelector(nameSelector),
+      this._elementProf = document.querySelector(profSelector),
+      this._elemntImg = document.querySelector(avatarSelector)
   }
 
-  apiUserInfo(name, about, avatar) {
-    this._elementName.textContent = name
-    this._elementProf.textContent = about
-    this._elemntImg.src = avatar
+  setUserInfo(name, about, avatar) {
+    if (name) {
+      this._elementName.textContent = name
+    }
+    if (about) {
+      this._elementProf.textContent = about
+    }
+    if (avatar) {
+      this._elemntImg.src = avatar
+    }
+
   }
 
-  setUserInfo(inputName, inputProf,) {
-    this._elementName.textContent = inputName
-    this._elementProf.textContent = inputProf
-  }
-  getUserInfo({ nameInput, profInput }) {
-    nameInput.value = this._elementName.textContent
-    profInput.value = this._elementProf.textContent
+  getUserInfo() {
+    return {
+      userName: this._elementName.textContent,
+      userDescription: this._elementProf.textContent
+    }
   }
 }
 

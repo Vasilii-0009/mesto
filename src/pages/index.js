@@ -9,6 +9,7 @@ import { UserInfo } from '../components/UserInfo.js'
 import { Api } from '../components/Api.js'
 import './index.css';
 
+
 const popupFormEdit = document.querySelector('.popup__form-edit');
 const profileBtnEdit = document.querySelector('.profile__btn-edit');
 const popupEdit = document.querySelector('.popup-edit');
@@ -27,7 +28,7 @@ const popupText = document.querySelector('.popup-add__input_value_autor');
 const popupImg = document.querySelector('.popup-add__input_value_prof');
 const elements = document.querySelector('.elements');
 const popups = document.querySelectorAll('.popup');
-
+const btnDeleteCard = document.querySelector('.popup-delet__btn')
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -41,12 +42,7 @@ const config = {
 const avatarConteiner = document.querySelector('.profile__container-img')
 const popupAvatar = document.querySelector('.popup-avatar')
 const avatar = document.querySelector('.profile__img')
-const btnConfirDelete = document.querySelector('.popup-delet__btn')
-const elementPoupBtn = document.querySelector('.popup__button')
-const btnAddCard = document.querySelector('.popup-add__btn')
-const btnEditProf = document.querySelector('.popup-edit__btn')
-const btnAvatar = document.querySelector('.popup-avatar__btn')
-const btnDelet = document.querySelector('.popup-delet__btn')
+
 
 // FormValidator popupFormEdit
 const profileEditFormValidator = new FormValidator(config, popupFormEdit)
@@ -68,31 +64,43 @@ const configApi = {
     authorization: 'f2aec418-693a-4d30-9fa0-f227bcec820c'
   },
 }
-
-//creatCards with api
 const dataApi = new Api(configApi)
-dataApi.getTasks().then((response) => {
-  // const itemCard = Response.slice(0, 4)
-  initCards.renderItems(response)
+
+//getInfoUser with api
+let userId = ''
+
+Promise.all([dataApi.getInfoUser(), dataApi.getTasks()]).then(([getInfoUser, getTasks]) => {
+  userId = getInfoUser._id,
+    userInfo.setUserInfo(getInfoUser.name, getInfoUser.about, getInfoUser.avatar),
+    initCards.renderItems(getTasks)
 })
-  .catch((err) => Promise.reject(`Картинки не добавлены (код ошибки): ${err}`));
 
 //creatCards
 function createCard(data) {
-  const card = new Card(data, '#elements__element', handleCardClick, userInfo, dataApi, popupConfirmation)
+  const card = new Card(data, '#elements__element', handleCardClick, userInfo, handelAddleLike, handlerRemoveLike, userId, handlerRomoveCards)
+
   return card.generateCard()
 }
 
 const initCards = new Section((card) => {
-  initCards.setItem(createCard(card))
+  initCards.setItemCards(createCard(card))
+
 },
   '.elements')
 
-//getInfoUser with api
-dataApi.getInfoUser().then((formData) => {
-  userInfo.apiUserInfo(formData.name, formData.about, formData.avatar)
-})
-  .catch((err) => Promise.reject(`Данные не получены с сервира (код ошибки) : ${err}`));
+//Function handelToggleLike
+function handelAddleLike(id, elementNumber) {
+  dataApi.addLike(id).then((data) => {
+    elementNumber.textContent = data.likes.length
+  })
+}
+
+//Function handlerRemoveLike
+function handlerRemoveLike(id, elementNumber) {
+  dataApi.deleteLike(id).then((data) => {
+    elementNumber.textContent = data.likes.length
+  })
+}
 
 //popupAddCard//
 const popupAddCard = new PopupWithForm('.popup-add', handleAddCardSubmit)
@@ -100,73 +108,105 @@ popupAddCard.setEventListener()
 
 function handleAddCardSubmit(formData) {
   //popupAddCard with API//
+  popupAddCard.renderLoading(true)
   dataApi.creatCard(formData.name, formData.link).then(res => {
     initCards.setItem(createCard(res))
+    popupAddCard.close()
   })
-    .catch((err) => Promise.reject(`Карточка не добавались (код ошибки): ${err}`));
-  setTimeout(closePopupTimer, 1000, popupAddCard)
-  //popupAddCard.close()
+    .catch((err) => {
+      Promise.reject(`Карточка не добавались (код ошибки): ${err}`)
+        .finally(() => {
+          popupAddCard.renderLoading(false)
+        })
+    }
+    );
 
 }
+
 
 //popupWithFormEdit
 const popupWithFormEdit = new PopupWithForm('.popup-edit', handleFormSubmitEdit)
 popupWithFormEdit.setEventListener()
 
 function handleFormSubmitEdit(formData) {
-  // userInfo with Api
-
+  //userInfo with Api
+  popupWithFormEdit.renderLoading(true)
   dataApi.saveInfoUser(formData.inputName, formData.inputProf).then(data => {
     userInfo.setUserInfo(data.name, data.about)
-
+    popupWithFormEdit.close()
   })
-    .catch((err) => Promise.reject(`Поля не заполнены(код шибки): ${err}`))
-  setTimeout(closePopupTimer, 1000, popupWithFormEdit)
-  // popupWithFormEdit.close()
+    .catch((err) => {
+      Promise.reject(`Поля не заполнены(код шибки): ${err}`)
+        .finally(() => {
+          popupWithFormEdit.renderLoading(false)
+        })
+    })
+
 }
-const userInfo = new UserInfo({ name: '.profile__autor', prof: '.profile__text', avatar: '.profile__img' })
+
+const userInfo = new UserInfo({ nameSelector: '.profile__autor', profSelector: '.profile__text', avatarSelector: '.profile__img', })
 
 //PopupWithConfirmation//
-const popupConfirmation = new PopupWithConfirmation('.popup-delet')
+const popupConfirmation = new PopupWithConfirmation('.popup-delet', deleteCard)
 popupConfirmation.setEventListener()
+
+//Function handlerRemoveCards
+function handlerRomoveCards(id, elementCard) {
+  popupConfirmation.open()
+  popupConfirmation.fixCardInfo(id, elementCard)
+}
+
+function deleteCard(data, elementCard) {
+  dataApi.deleteCard(data).then(() => {
+    popupConfirmation.close()
+  })
+    .catch((err) => Promise.reject(`Запрос к серверу не прошел: ${err}`))
+  elementCard.remove()
+}
 
 //popupWithFormEdit avatar api//
 const popupWithFormAvatar = new PopupWithForm('.popup-avatar', handleFormSubmitAvatar)
 popupWithFormAvatar.setEventListener()
 
 function handleFormSubmitAvatar(formData) {
-
+  popupWithFormAvatar.renderLoading(true)
   dataApi.updateAvatar(formData.inputAvatar).then((data) => {
     avatar.src = data.avatar
+    popupWithFormAvatar.close()
   })
-    .catch((err) => Promise.reject(`Ввели не коректный URl(код ошибки): ${err}`))
-  setTimeout(closePopupTimer, 1000, popupWithFormAvatar)
-  //popupWithFormAvatar.close()
+    .catch((err) => {
+      Promise.reject(`Ввели не коректный URl(код ошибки): ${err}`)
+        .finally(() => {
+          popupWithFormAvatar.renderLoading(false)
+        })
+    }
+    )
+
 }
 
 // edit
 profileBtnEdit.addEventListener('click', function openPopupProfile() {
+  popupWithFormEdit.resetRenderLoading()
   profileEditFormValidator.resetValidationErrors()
   profileEditFormValidator.disableButton()
-  btnEditProf.textContent = 'Сохранить'
   popupWithFormEdit.open()
-
-  userInfo.getUserInfo({ nameInput: inputAutor, profInput: inputProf })
-
+  const getUserInfo = userInfo.getUserInfo()
+  inputAutor.value = getUserInfo.userName
+  inputProf.value = getUserInfo.userDescription
 })
 
 //plus
 addCardButton.addEventListener('click', function openPopupProfile() {
+  popupAddCard.resetRenderLoadingForPlus()
   addCardFormValidator.resetValidationErrors()
   addCardFormValidator.disableButton()
-  btnAddCard.textContent = 'Создать'
   popupAddCard.open()
 
 })
 // edit avatar 
 avatarConteiner.addEventListener('click', () => {
+  popupWithFormAvatar.resetRenderLoading()
   avatarFormValidator.disableButton()
-  btnAvatar.textContent = 'Сохранить'
   popupWithFormAvatar.open()
 })
 
@@ -174,24 +214,9 @@ avatarConteiner.addEventListener('click', () => {
 const popupWithImage = new PopupWithImage('.popup-photo')
 popupWithImage.setEventListener()
 
-function handleCardClick(name, link, number) {
-  popupWithImage.open(name, link, number)
+function handleCardClick(name, link) {
+  popupWithImage.open(name, link)
 }
 
-// const initCards = new Section({
-//   data: initialCards,
-//   renderer: (cardItem) => {
-//     initCards.setItem(creatCard(cardItem))
-//   },
-// },
-//   '.elements'
-// )
-// initCards.renderItems()
-
-
-
-function closePopupTimer(elementPopup) {
-  elementPopup.close()
-}
 
 

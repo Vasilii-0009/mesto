@@ -4,7 +4,7 @@ class Api {
     this._headers = configApi.headers
   }
 
-  _showres(item) {
+  _checkResponse(item) {
     return item.then(item => {
       if (item.ok) {
 
@@ -18,14 +18,14 @@ class Api {
     const card = fetch(`${this._url}/cards`, {
       headers: this._headers,
     })
-    return this._showres(card)
+    return this._checkResponse(card)
   }
 
   getInfoUser() {
     const infoUSer = fetch(`${this._url}/users/me`, {
       headers: this._headers,
     })
-    return this._showres(infoUSer)
+    return this._checkResponse(infoUSer)
   }
 
   saveInfoUser(name, about) {
@@ -36,7 +36,7 @@ class Api {
         name, about
       })
     })
-    return this._showres(saveInfoUser)
+    return this._checkResponse(saveInfoUser)
   }
 
   creatCard(name, link) {
@@ -45,7 +45,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({ name, link })
     })
-    return this._showres(creatCard)
+    return this._checkResponse(creatCard)
   }
 
   deleteCard(id) {
@@ -53,16 +53,16 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    return this._showres(deleteCard)
+    return this._checkResponse(deleteCard)
   }
 
-  addLike(id, elemntLike,) {
+  addLike(id,) {
     const addLike = fetch(`${this._url}/cards/${id}/likes`, {
       method: 'PUT',
       headers: this._headers,
-      body: JSON.stringify({ elemntLike })
+      // body: JSON.stringify({ elemntLike })
     })
-    return this._showres(addLike)
+    return this._checkResponse(addLike)
   }
 
   deleteLike(id) {
@@ -70,7 +70,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    return this._showres(addLike)
+    return this._checkResponse(addLike)
   }
 
   updateAvatar(avatar) {
@@ -81,10 +81,8 @@ class Api {
         avatar
       })
     })
-    return this._showres(updateAvatar)
+    return this._checkResponse(updateAvatar)
   }
-
-
 }
 
 export { Api } 
