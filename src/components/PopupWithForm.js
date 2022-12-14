@@ -6,39 +6,26 @@ class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit
     this._elementForm = this._elementPopup.querySelector('.popup__form')
     this._btnPopup = this._elementPopup.querySelector('.popup__btn')
+    this._btnText = this._btnPopup.textContent
   }
 
   close() {
     super.close()
     this._elementForm.reset()
   }
-  open() {
-    super.open()
-    //this._elementForm.reset()
 
-  }
-  renderLoading(isLoading) {
-    if (isLoading)
-      this._btnPopup.textContent = 'Сохранение...'
+  renderLoading(isLoading, loadingText = 'Сохранение...') {
+    if (isLoading) {
+      this._btnPopup.textContent = loadingText
+    }
     else {
-      this._btnPopup.textContent = 'Ошибка'
+      this._btnPopup.textContent = this._btnText
     }
   }
-  resetRenderLoading() {
-    this._btnPopup.textContent = 'Сохранить'
-  }
-  resetRenderLoadingForPlus() {
-    this._btnPopup.textContent = 'Создать'
-  }
-
-
-
 
   _getInputValues() {
     this._inputList = this._elementPopup.querySelectorAll('.popup__input');
-
     this._inputValues = {}
-
     this._inputList.forEach((input) => {
       this._inputValues[input.name] = input.value;
     })
@@ -47,18 +34,11 @@ class PopupWithForm extends Popup {
 
   setEventListener() {
     super.setEventListener()
-
     this._elementPopup.addEventListener('submit', (evt) => {
       evt.preventDefault()
       this._handleFormSubmit(this._getInputValues())
-
     })
-
-
   }
-
-
-
 }
 
 export { PopupWithForm }

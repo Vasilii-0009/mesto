@@ -15,20 +15,18 @@ class Popup {
   }
 
   _handleEscClose(evt) {
-
     if (evt.key === 'Escape') {
       this.close()
     }
   }
 
-
   setEventListener() {
     this._elementPopup.addEventListener('click', (evt) => {
       if (evt.target === this._elementPopup || evt.target === this._elementPopup.querySelector('.popup__close')) {
         this.close()
-
       }
     })
   }
 }
+
 export { Popup }

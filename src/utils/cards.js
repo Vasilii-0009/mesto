@@ -11,35 +11,30 @@ const initialCards = [{
   number: 6,
 
 }
-
   ,
 {
   name: 'Челябинская область',
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
   number: 2,
 }
-
   ,
 {
   name: 'Иваново',
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
   number: 1,
 }
-
   ,
 {
   name: 'Камчатка',
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
   number: 3,
 }
-
   ,
 {
   name: 'Холмогорский район',
   link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
   number: 4,
 }
-
   ,
 {
   name: 'Байкал',

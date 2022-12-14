@@ -1,5 +1,3 @@
-
-
 class Section {
   constructor(renderer, containerSelector) {
 
@@ -14,10 +12,11 @@ class Section {
   setItem(element) {
     this._containerSelector.prepend(element);
   }
-  setItemCards(element) {
+
+  appendItem(element) {
     this._containerSelector.append(element);
   }
 
-
 }
+
 export { Section }

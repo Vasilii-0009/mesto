@@ -1,21 +1,17 @@
 class Card {
-  constructor(data, templateElement, openPopup, userInfo, handelAddleLike, handlerRemoveLike, userId, handlerRomoveCards) {
+  constructor(data, templateElement, openPopup, handelAddleLike, handlerRemoveLike, userId, handlerRomoveCards) {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id
     this._owner = data.owner
-    this._data = data
-    this._arraryLikes = data.likes
-    this._userInfo = userInfo
     this._likes = data.likes
-    this._templateElement = templateElement,
-      this._openPopup = openPopup
+    this._arraryLikes = data.likes
+    this._templateElement = templateElement
+    this._openPopup = openPopup
     this._handelAddleLike = handelAddleLike
     this._handlerRemoveLike = handlerRemoveLike
     this._userId = userId
     this._handlerRomoveCards = handlerRomoveCards
-
-
   }
 
   _getTemplate() {
@@ -35,22 +31,14 @@ class Card {
     elemntImg.src = this._link
     elemntImg.alt = this._name
 
-    // if (this._userInfo._elementName.textContent != this._owner.name) {
+    this._setEventListeners(elemntLike, elemntBascket, elemntImg, this._userId)
 
-    //   elemntBascket.remove()
-    // }
-
-
-
-    this._setEventListeners(elemntLike, elemntBascket, elemntImg, this._userId,)
-    if (this._owner._id != this._userId) {
-
+    if (this._owner._id !== this._userId) {
       elemntBascket.remove()
-
     }
+
     this._checkLikes(this._userId, elemntLike)
     return this._element
-
   }
 
   _checkLikes(userId, elemntLike) {
@@ -66,7 +54,7 @@ class Card {
     }
 
   }
-  _setEventListeners(elemntLike, elemntBascket, elemntImg,) {
+  _setEventListeners(elemntLike, elemntBascket, elemntImg) {
     this._elementNumber = this._element.querySelector('.elements__number')
     this._elementNumber.textContent = this._likes.length
 
@@ -79,54 +67,28 @@ class Card {
         this._addLike(elemntLike)
         this._handelAddleLike(this._id, this._elementNumber)
       }
-
     })
 
-
     elemntBascket.addEventListener('click', () => {
-      //this._deleteCard(elemntBascket)
-      // this._handleFormSubmitDelet()
       this._handlerRomoveCards(this._id, this._element)
     })
 
     elemntImg.addEventListener('click', () => {
       this._openImagePopup()
     })
-
   }
-
-
 
   _addLike(elemntLike) {
     elemntLike.classList.add('elements__img-heart')
   }
 
-
   _deleteLike(elemntLike) {
     elemntLike.classList.remove('elements__img-heart')
-  }
-
-
-  // _deleteCard(elemntBascket) {
-  //   elemntBascket.closest(this._element.remove())
-  // }
-
-
-  _deleteCard() {
-    // this._handlerRomoveCards(this._id)
-    //this._element.remove()
-  }
-
-  _handleFormSubmitDelet() {
-
-
-
   }
 
   _openImagePopup() {
     this._openPopup(this._name, this._link)
   }
-
 }
 
 export { Card }

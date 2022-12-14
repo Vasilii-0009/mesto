@@ -29,6 +29,9 @@ const popupImg = document.querySelector('.popup-add__input_value_prof');
 const elements = document.querySelector('.elements');
 const popups = document.querySelectorAll('.popup');
 const btnDeleteCard = document.querySelector('.popup-delet__btn')
+const avatarConteiner = document.querySelector('.profile__container-img')
+const popupAvatar = document.querySelector('.popup-avatar')
+const avatar = document.querySelector('.profile__img')
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -37,12 +40,6 @@ const config = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 };
-
-//new const 
-const avatarConteiner = document.querySelector('.profile__container-img')
-const popupAvatar = document.querySelector('.popup-avatar')
-const avatar = document.querySelector('.profile__img')
-
 
 // FormValidator popupFormEdit
 const profileEditFormValidator = new FormValidator(config, popupFormEdit)
@@ -73,25 +70,28 @@ Promise.all([dataApi.getInfoUser(), dataApi.getTasks()]).then(([getInfoUser, get
   userId = getInfoUser._id,
     userInfo.setUserInfo(getInfoUser.name, getInfoUser.about, getInfoUser.avatar),
     initCards.renderItems(getTasks)
-})
+}).catch((err) => {
+  console.log(`Данные не сохранились на сервере (код ошибки): ${err}`)
+
+});
 
 //creatCards
 function createCard(data) {
-  const card = new Card(data, '#elements__element', handleCardClick, userInfo, handelAddleLike, handlerRemoveLike, userId, handlerRomoveCards)
-
+  const card = new Card(data, '#elements__element', handleCardClick, handelAddleLike, handlerRemoveLike, userId, handlerRomoveCards)
   return card.generateCard()
 }
 
 const initCards = new Section((card) => {
-  initCards.setItemCards(createCard(card))
+  initCards.appendItem(createCard(card))
+}, '.elements')
 
-},
-  '.elements')
 
 //Function handelToggleLike
 function handelAddleLike(id, elementNumber) {
   dataApi.addLike(id).then((data) => {
     elementNumber.textContent = data.likes.length
+  }).catch((err) => {
+    console.log(`Лайк не добавлен (код ошибки): ${err}`)
   })
 }
 
@@ -99,6 +99,8 @@ function handelAddleLike(id, elementNumber) {
 function handlerRemoveLike(id, elementNumber) {
   dataApi.deleteLike(id).then((data) => {
     elementNumber.textContent = data.likes.length
+  }).catch((err) => {
+    console.log(`Лайк не удален (код ошибки): ${err}`)
   })
 }
 
@@ -112,15 +114,10 @@ function handleAddCardSubmit(formData) {
   dataApi.creatCard(formData.name, formData.link).then(res => {
     initCards.setItem(createCard(res))
     popupAddCard.close()
+  }).catch((err) => {
+    console.log(`Карточка не сохранена  (код ошибки): ${err}`)
+    popupAddCard.renderLoading(false)
   })
-    .catch((err) => {
-      Promise.reject(`Карточка не добавались (код ошибки): ${err}`)
-        .finally(() => {
-          popupAddCard.renderLoading(false)
-        })
-    }
-    );
-
 }
 
 
@@ -134,14 +131,10 @@ function handleFormSubmitEdit(formData) {
   dataApi.saveInfoUser(formData.inputName, formData.inputProf).then(data => {
     userInfo.setUserInfo(data.name, data.about)
     popupWithFormEdit.close()
+  }).catch((err) => {
+    console.log(`Данные пользователя не сохранены (код ошибки): ${err}`)
+    popupWithFormEdit.renderLoading(false)
   })
-    .catch((err) => {
-      Promise.reject(`Поля не заполнены(код шибки): ${err}`)
-        .finally(() => {
-          popupWithFormEdit.renderLoading(false)
-        })
-    })
-
 }
 
 const userInfo = new UserInfo({ nameSelector: '.profile__autor', profSelector: '.profile__text', avatarSelector: '.profile__img', })
@@ -159,9 +152,10 @@ function handlerRomoveCards(id, elementCard) {
 function deleteCard(data, elementCard) {
   dataApi.deleteCard(data).then(() => {
     popupConfirmation.close()
+    elementCard.remove()
+  }).catch((err) => {
+    console.log(`Карточка не удалена (код ошибки): ${err}`)
   })
-    .catch((err) => Promise.reject(`Запрос к серверу не прошел: ${err}`))
-  elementCard.remove()
 }
 
 //popupWithFormEdit avatar api//
@@ -173,20 +167,15 @@ function handleFormSubmitAvatar(formData) {
   dataApi.updateAvatar(formData.inputAvatar).then((data) => {
     avatar.src = data.avatar
     popupWithFormAvatar.close()
+  }).catch((err) => {
+    console.log(`Аватар не поменялся (код ошибки): ${err}`)
+    popupWithFormAvatar.renderLoading(false)
   })
-    .catch((err) => {
-      Promise.reject(`Ввели не коректный URl(код ошибки): ${err}`)
-        .finally(() => {
-          popupWithFormAvatar.renderLoading(false)
-        })
-    }
-    )
-
 }
 
 // edit
 profileBtnEdit.addEventListener('click', function openPopupProfile() {
-  popupWithFormEdit.resetRenderLoading()
+  popupWithFormEdit.renderLoading(false)
   profileEditFormValidator.resetValidationErrors()
   profileEditFormValidator.disableButton()
   popupWithFormEdit.open()
@@ -197,15 +186,16 @@ profileBtnEdit.addEventListener('click', function openPopupProfile() {
 
 //plus
 addCardButton.addEventListener('click', function openPopupProfile() {
-  popupAddCard.resetRenderLoadingForPlus()
+  popupAddCard.renderLoading(false)
   addCardFormValidator.resetValidationErrors()
   addCardFormValidator.disableButton()
   popupAddCard.open()
 
 })
+
 // edit avatar 
 avatarConteiner.addEventListener('click', () => {
-  popupWithFormAvatar.resetRenderLoading()
+  popupWithFormAvatar.renderLoading(false)
   avatarFormValidator.disableButton()
   popupWithFormAvatar.open()
 })

@@ -15,7 +15,6 @@ class UserInfo {
     if (avatar) {
       this._elemntImg.src = avatar
     }
-
   }
 
   getUserInfo() {

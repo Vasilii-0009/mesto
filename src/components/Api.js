@@ -7,7 +7,6 @@ class Api {
   _checkResponse(item) {
     return item.then(item => {
       if (item.ok) {
-
         return item.json()
       }
       return Promise.reject(`${item.status}`)
@@ -60,7 +59,6 @@ class Api {
     const addLike = fetch(`${this._url}/cards/${id}/likes`, {
       method: 'PUT',
       headers: this._headers,
-      // body: JSON.stringify({ elemntLike })
     })
     return this._checkResponse(addLike)
   }
