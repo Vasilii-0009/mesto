@@ -116,7 +116,9 @@ function handleAddCardSubmit(formData) {
     popupAddCard.close()
   }).catch((err) => {
     console.log(`Карточка не сохранена  (код ошибки): ${err}`)
-    popupAddCard.renderLoading(false)
+      .finally(() => {
+        popupAddCard.renderLoading(false)
+      })
   })
 }
 
@@ -134,6 +136,9 @@ function handleFormSubmitEdit(formData) {
   }).catch((err) => {
     console.log(`Данные пользователя не сохранены (код ошибки): ${err}`)
     popupWithFormEdit.renderLoading(false)
+      .finally(() => {
+        popupWithFormEdit.renderLoading(false)
+      })
   })
 }
 
@@ -169,7 +174,9 @@ function handleFormSubmitAvatar(formData) {
     popupWithFormAvatar.close()
   }).catch((err) => {
     console.log(`Аватар не поменялся (код ошибки): ${err}`)
-    popupWithFormAvatar.renderLoading(false)
+      .finally(() => {
+        popupWithFormAvatar.renderLoading(false)
+      })
   })
 }
 
