@@ -1,6 +1,6 @@
 import { Card } from '../components/Card.js'
 import { FormValidator } from '../components/FormValidator.js'
-import { initialCards } from '../utils/cards.js'
+
 import { Section } from '../components/Section.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { PopupWithForm } from '../components/PopupWithForm.js'
@@ -128,6 +128,7 @@ const popupWithFormEdit = new PopupWithForm('.popup-edit', handleFormSubmitEdit)
 popupWithFormEdit.setEventListener()
 
 function handleFormSubmitEdit(formData) {
+  console.log(formData)
   //userInfo with Api
   popupWithFormEdit.renderLoading(true)
   dataApi.saveInfoUser(formData.inputName, formData.inputProf).then(data => {
@@ -209,11 +210,13 @@ avatarConteiner.addEventListener('click', () => {
 
 //popupWithImage
 const popupWithImage = new PopupWithImage('.popup-photo')
+
 popupWithImage.setEventListener()
 
 function handleCardClick(name, link) {
   popupWithImage.open(name, link)
 }
+
 
 
 
